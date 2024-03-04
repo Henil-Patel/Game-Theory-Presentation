@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>ECG 765 Final</title>
+        <script src="d3.v7.js"></script>
+		<link rel="stylesheet" href="reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="reveal.js/dist/theme/blood.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+        <!-- <style>
+            @import url('https://fonts.googleapis.com/css2?family=Latin+Modern+Roman&display=swap');
+        </style> -->
+        <style>
+            .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6{
+                font-weight: normal;
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 1.5em;
+
+            }
+
+            /* .reveal body, .reveal ul , .reveal li{
+                font-family: 'Latin Modern Roman', serif;
+            } */
+
+            .reveal p{
+                margin: 0.3em;
+                margin-bottom: 1%;
+            }
+
+            .reveal ul{
+                text-indent: 0em;
+                padding-left: 1em;
+                margin-left: 1em;
+                list-style-type:upper-roman;
+                font-family: 'Latin Modern Roman', serif;
+            }
+
+            .reveal li{
+                margin-bottom: 1em;
+                margin-top: 1.5em;
+            }
+            
+        </style>
+        <style>
+            .reveal .opening {
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* Align items to the top of the slide */
+                align-items:center;
+                height: 100%;
+            }
+            .reveal .content {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                height: 100%;
+            }
+            .reveal .align-left{
+                display:flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items:flex-start;
+                height: 100%;
+                font-size: 65%;
+                text-align: left;
+                margin-left: -15%;
+                margin-right: -15%;
+            }
+        </style>
+        <style>
+            .reveal .slides .opening .author-name {
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 1.0em; /* Adjust the font size as needed */
+            }
+            .reveal .slides .title {
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 1.25em;
+                margin-bottom: 1em;
+            }
+            .reveal .slides .inter-title {
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 1.25em;
+                margin-bottom: 0.75em;
+            }
+            .reveal .slides .opening .classname {
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-weight: normal;
+                margin-bottom: 2em;
+                margin-top: 1em;
+            }
+
+            .reveal .slides .fig-title {
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                text-align: left; 
+                margin-left: 67%; 
+                font-size: 0.75em;
+            }
+        </style>
+        
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="opening" id="title">
+                    <h3 class="classname">NPOE Talks Series</h3>
+                    <p class="title">Game Theory for the Impatient</p>
+                    <p class="author-name">Henil Patel</p1>
+                </section>
+                <section class = "content" id="brief-history">
+                    <p class="inter-title">Brief History</p>
+                    <div class="align-left">
+                        <p class = "fragment fade-in-then-semi-out"><b style="color: red;">(1944)</b> John Von Neumann & Oskar Morgenstern</p>
+                        <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Theory of Games and Economic Behavior published</p>
+                        <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">...your outcomes are not only determined by your choices but also the choices of others</p>
+                        <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">...much like in an economy, outcomes are based on the aggregate of decisions made by firms, consumers and governments</p>
+                        <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Revolutionized the analysis of decision making</p>
+                        <p class = "fragment fade-in-then-semi-out"><b style="color: red;">(1950)</b> John Nash</p>
+                        <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">"Equilibrium Points in n-Person Games" published</p>
+                        <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Proved there exists a mixed strategy equilibrium in n-Person games (more on this later)</p>
+                        <!-- <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Players $P$ - set of the decision makers</p> -->
+                        <!-- <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Strategies $S$ - set of actions available to players</p> -->
+                    </div>
+                </section>
+                <section class = "content" id="motivation">
+                    <p class="inter-title">Motivation</p>
+                    <div class="align-left">
+                        <p class = "fragment fade-in-then-semi-out", style="text-align: center; font-style: oblique; margin-right: 10%; margin-left: 10%;">"A <b style="color: red">game</b> is a situation in which each participant's gain or loss is determined not only by their own actions but also by the actions of others."</p>
+                        <p class = "fragment fade-in-then-semi-out", style="margin-top: 1em;">In a sealed-bid auction, how much should a bidder bid given their private valuation of the item and their expected valuation by other bidders? - <em style="color: red">Auction Theory</em></p>
+                        <p class = "fragment fade-in-then-semi-out", style="margin-top: 1em;">If there are two firms (one price-setting and another price-taking), how much should each firm produce in response to the other? - <em style="color: red">Stackelberg Competition</em></p>
+                        <p class = "fragment fade-in-then-semi-out", style="margin-top: 1em;">How should countries achieve a common goal of reducing carbon emissions while balancing their own economic interest? - <em style="color: red">Tragedy of the Commons</em></p>
+                        <p class = "fragment fade-in-then-semi-out", style="margin-top: 1em;">How effective is the threat of retaliation to deter further warfare? - <em style="color: red">Deterrence Theory</em></p>
+                    </div>
+                </section>
+                <section class = "content" id="notation">
+                    <p class = "inter-title">Notation</p>
+                    <div class = "align-left">
+                        <p class="fragment fade-in-then-semi-out">$p \in P$ means $p$ is an element of $P$</p>
+                        <p class="fragment fade-in-then-semi-out">$\sum_{i \in I} a_i$ means sum $a_i$ for all values of $i \in I$</p>
+                        <p class="fragment fade-in-then-semi-out">$f: \R_1 \times ... \times \R_n \rightarrow \R$ means $f$ is a multi-variable function which maps a <b style = "color: red">Cartesian product of Real Numbers (domain)</b> to a <b style ="color: red">Real Number (image)</b></p>
+                        <p class="fragment fade-in-then-semi-out">$Pr: T \rightarrow [0,1]$ means a function which assigns probability to an event $t \in T$</p>
+                        <p class="fragment fade-in-then-semi-out">$Pr(E | H)$ means the probability of event $E$ "given" event $H$</p>
+                        <!-- <p class="fragment fade-in-then-semi-out"></p> -->
+                    </div>
+                </section>
+                <section class ="content" id="model">
+                    <section class = "content">
+                        <p class = "inter-title">Model</p>
+                        <div class ="align-left">
+                            <p class="fragment fade-in-then-semi-out">$P$ - set of players $p_i$ for all $i = 1...n$</p>
+                            <p class="fragment fade-in-then-semi-out">$S_i$ - set of strategies $s_i$ open to player $i$</p>
+                            <p class="fragment fade-in-then-semi-out">$u: S_i \times S_{i'} \rightarrow \R$ - payoff function for player $i$ choosing strategy $s_i$ given strategies chosen by $i'$ players</p>
+                            <!-- <p class="fragment fade-in-then-semi-out"></p>
+                            <p class="fragment fade-in-then-semi-out"></p>
+                            <p class="fragment fade-in-then-semi-out"></p>
+                            <p class="fragment fade-in-then-semi-out"></p>
+                            <p class="fragment fade-in-then-semi-out"></p>
+                            <p class="fragment fade-in-then-semi-out"></p> -->
+                        </div>
+                    </section>
+                    <!-- <section class="content">
+                        <p class = "inter-title">Model</p>
+                        <div class = "align-left">
+                            <p class="fragment fade-in-then-semi-out">$\xi_i$ : lower bound for consumption set $X_i$</p>
+                            <p class="fragment fade-in-then-semi-out">$\mathcal{L}$ : set of commodities which represent labor services</p>
+                            <p class="fragment fade-in-then-semi-out">$\zeta_i$ : initial holdings (endowments) in $\R^l$ of individual $i$</p>
+                            <p class="fragment fade-in-then-semi-out">$\alpha_{ij}$ : share of profit for individual $i$ by firm $j$</p>
+                        </div>
+                    </section> -->
+                </section>
+                <section class="content" id="prisoners-dilemma">
+                    <p class="inter-title">Prisoner's Dilemma</p>
+                    <p class="fig-title">Payoff Matrix</p>
+                    <div class ="align-left">
+                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p>
+                    </div>
+                    <script src="animations/prodClosedConvex.js"></script>
+                </section>
+                <section class="content" id="firms2">
+                    <p class="inter-title">A1 Production Possibilities</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">If $0 \leqq \lambda \leqq 1$ then $\lambda y_j = \lambda y_j + (1 - \lambda)0 \in Y_j$ implies convexity as $0 \in Y_j$</p>
+                        <p class="fragment fade-in-then-semi-out">Closure of $Y_j$ implies that if vectors arbitrarily close to $y_j$ are in $Y_j$ then so is $y_j$</p>
+                        <p class="fragment fade-in-then-semi-out">At least one component of $y_j$ must be negative i.e,</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: auto; margin-right: auto;">ex: $y_j = (-1,0,-1,2,0,...,1)$</p>
+                        <p class="fragment fade-in-then-semi-out">If $y_j \in Y$ then $-y_j \not\in Y$</p>
+                        <p class="fragment fade-in-then-semi-out">Let a firm use $(y_{j1},...,y_{jk}) < 0$ inputs to produce $(y_{jk+1},...,y_{jh}) > 0$ outputs then $-y_j \in Y$ would imply that $(y_{jk+1},...,y_{jh}) < 0$ inputs can be used to produce $(y_{j1},...,y_{jk}) > 0$ outputs</p>
+                        <p class="fragment fade-in-then-semi-out">Does not work in case of labor!</p>
+                    </div>
+                </section>
+                <section class="content" id="consumers1">
+                    <p class="inter-title" id="consumers1">A2 Consumption Possibilities</p>
+                    <p class="fig-title">Visualizing $X_i$ in $\R^2$</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">The set of consumption vectors $X_i$ available to individual $i (=1,...,m)$ is a closed convex subset of $\R^l$
+                                                                    which is <b>bounded</b> from below; i.e, there is a vector <b style="color: red;">$\xi_i$</b> such that $\xi_i \leqq x_i$ for all $x_i \in X_i$.
+                        </p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">$\xi_i$ must exist to ensure that commodities like labour input $x_{hi}$ cannot exceed 24 hours</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%">$\xi_i$ also ensures that consumption bundles insufficient to sustain life are excluded</p>
+                    </div>
+                    <script src="animations/consClosedConvex.js"></script>
+                </section>
+                <section class="content" id="consumers2">
+                    <p class="inter-title" id="consumers2">A3 Consumer Preferences</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">$u_i(x_i) \geq u_i(x'_i) \iff x_i \succsim x_i'$</p>
+                        <p class="fragment fade-in-then-semi-out">$u_i(x_i)$ is a continuous function on $X_i$</p>
+                        <p class="fragment fade-in-then-semi-out">For any $x_i \in X_i$, there is an $x_i'$, such that $u_i(x_i') > u_i(x_i)$</p>
+                        <p class="fragment fade-in-then-semi-out">If $u_i(x_i) > u_i(x_i')$ and $0 < t < 1$ <br> then $u_i[tx_i + (1-t)x_i']  > u_i(x_i')$ i.e, $u_i$ is quasi-concave</p>
+                    </div>
+                    <script src="animations/utilityFunction.js"></script>
+                </section>
+                <section class="content" id="consumers3">
+                    <p class="inter-title" id="consumers3">A3 Consumer Preferences</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out"><b style="color: red;">[Representation Theorem; Debreu 1954]</b> A continuous $u_i(x_i)$ is equivalent to the assumption:</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: auto; margin-left: auto;">$\forall x'_i$, the sets $\{x_i | x_i \in X_i , x_i \succsim x'_i\}$ and  $\{x_i | x_i \in X_i , x'_i \succsim x_i\}$ are closed in $X_i$</p>
+                        <p class="fragment fade-in-then-semi-out">...implies continuous preference relation $\succsim$</p>
+                        <p class="fragment fade-in-then-semi-out">No satiation point, i.e no vector that the individual prefers to all other vectors</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For all $x_i$ and any $\epsilon > 0$, $\exists x_i'$ s.t $||x'_i - x_i|| < \epsilon$ and $u_i(x'_i) > u_i(x_i)$</p>
+                    </div>
+                </section>
+                <section class="content" id="consumers4">
+                    <p class="inter-title" id="consumers4">A4 Endowments</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">$\zeta_i \in \R^l$; for some $x_i \in X_i$, $x_i < \zeta_i$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$\zeta_i > x_i$ assumes that each individual could have commodities remaining after feasible consumption which can be used in trade</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Unrealistic but necessary for each individual to contribute a positive input to the economy at equilibrium so that each individual is a part of market transactions</p>
+                        <p class="fragment fade-in-then-semi-out">For all $i,j$, $\alpha_{ij} \geqq 0$; for all $j$, $\sum_{i=1}^m \alpha_{ij} = 1$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">The sum of all shares for firm $j$ is unity i.e, consumers own the firms</p>
+                    </div>
+                </section>
+                <section class = "content" id="firms3">
+                    <p class="inter-title" id="firms3">C1 Profit maximization</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">$y_j^*$ maximizes $p^*\cdot y_j$ over the set $Y_j$ for all $j$</p>
+                        <p class="fragment fade-in-then-semi-out">Where $p^* \cdot y_j$ (profit) is the inner product i.e, </p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: auto; margin-right: auto;">\[\begin{align*}p^*\cdot y_j &= \sum^l_{h=1}p^{*}_{h}\cdot y_{jh} \\
+                                                                                                                                            &= p^*_1y_{j1} + p^*_2y_{j2} + ... + p^*_ly_{jl}\end{align*}\]</p>
+                        <p class="fragment fade-in-then-semi-out">Given an equilibrium price vector $p^*$, firm $j$ is maximizing profit for each $j$</p>
+                    </div>
+                    <!-- <script src="animations/innerProd.js"></script> -->
+                </section>
+                <section class="content" id="consumers5">
+                    <p class="inter-title" id="consumers5">C2 Distribution of Wealth and Income</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">$x^*_i$ maximizes $u_i(x_i)$ over the set $\{x_i | x_i \in X_i, p^*\cdot x_i \leqq p^*\cdot \zeta_i + \sum_{j=1}^n\alpha_{ij}(p^*\cdot y^*_j)\}$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Objective is to maximize utility among all consumption vectors while satisfying the budget restraint</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">...the cost of the utility maximizing consumption vector should not exceed individual income</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$p^*\cdot x_i$ represents the expenditure on consumption bundle $x_i$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$p^*\cdot \zeta_i$ represents the revenue from selling endowment $\zeta_i$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$\sum_{j=1}^n\alpha_{ij}(p^*\cdot y^*_j)$ denotes the share of profit earned from production plan $y^*_j$</p>
+                    </div>
+                </section>
+                <section class="content" id="prices1">
+                    <p class="inter-title" id="prices1">C3 Pricing Systems and Equilibrium</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">$p^* \in P = \{p | p \in \R^l, p \geqq 0, \sum_{h=1}^l p = 1\}$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$p$ non-negative and $p$ normalized so that price of commodities sum to 1</p>
+                        <p class="fragment fade-in-then-semi-out">Nature of equilibrium</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Supply and demand of all commodities are treated as functions of $p$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">As $p$ varies to $p'$, producers and consumers treat $p'$ as the new equilibrium price vector</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Market equilibrium occurs when supply for a commodity equals demand</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Let $x = \sum_{i=1}^{m}x_i$, $y=\sum_{j=1}^{n}y_j$ and $\zeta = \sum_{i=1}^{m}\zeta_i$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Then $z = x - y - \zeta$ where $z$ is the excess of demand over supply</p>
+                    </div>
+                </section>
+                <section class="content" id="prices2">
+                    <p class="inter-title" id="prices2">C4 Market Clearing</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">$z^* \leqq 0$, $p^* \cdot z^* = 0$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Demand exceeds supply $\implies$ price rises</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Supply exceeds demand $\implies$ price falls</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$z^* \leqq 0$ ensures that demand does not exceed supply in equilibrium i.e, prices do not rise indefinitely</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">However prices cannot be driven down indefinitely, recall $p^* \geqq 0$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Thus $p^*\cdot z^* = \sum_h p^*_hz^*_h = 0$ iff $p^*_h = 0$ and $z^*_h < 0$ (free good) OR $z^*_h = 0$ (demand meets supply) for all $h$ commodities</p>
+                    </div>
+                </section>
+                <section class="content" id="prices3">
+                    <p class="inter-title" id="prices3">Double Take on Local Non-satitation</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Recall non-satiation, there is some $x'_i$ such that $u_i(x'_i) > u_i(x_i)$. Is this true at $x^*_i$?</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Assume it is true. Then by the convexity of $u_i$, it follows $u_i(x'_i) > u_i(x^*_i)$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Then there exists a profit maximizing $x'_i$ which also satisfies <br> $p^*\cdot x'_i \leqq p^*\cdot \zeta_i + \sum_{j=1}^n\alpha_{ij}(p^*\cdot y^*_j)$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Contradiction! At equilibrium, our original condition must be updated to reflect <br> $p^*\cdot x^*_i = p^*\cdot \zeta_i + \sum_{j=1}^n\alpha_{ij}(p^*\cdot y^*_j)$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">That is, consumer $i$ should receive ALL of their income and cannot withold any of it at if $p^*_h>0$ at the most optimal consumption plan</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">That is, $z_h^* = x_h^* - y^*_h - \zeta_h = 0$ for all $h$</p>
+                    </div>
+                </section>
+                <section class="content" id="competitive-equilibrium">
+                    <p class="inter-title" id="competitive-equilibrium">Competitive Equilibrium</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">A set of vectors $(x^*_1,...,x^*_m, y^*_1,...,y^*_n, p^*)$ is a competitive equilibrium if it satisfies the following conditions:</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$y^*_j \in \argmax p^*\cdot y_j$ where $y_j \in Y^j$ and $\forall j$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$x^*_i \in \argmax u_i(x_i)$ where $x_i \in X_i$ and $p^*\cdot x_i \leqq p^*\cdot \zeta_i + \sum_{j=1}^n\alpha_{ij}(p^*\cdot y^*_j)$</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$p^* \cdot z^*  = 0$ where $z^*= x^* - y^* - \zeta^* \leqq 0$ and $p^* \geqq 0$</p>
+                    </div>
+                </section>
+                <section class="content" id="big-one">
+                    <section class="content" id="big-one-1">
+                        <p class="inter-title" id="big-one1">Statement of The First Theorem</p>
+                        <div class="align-left">
+                            <p class="fragment fade-in-then-semi-out"> For any economic system satisfying the following assumptions:</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$Y_j$ is a closed convex subset of $\R^l$ containing <b style="color:red">$\bm{0}$</b> $\forall j$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$Y \cap \Omega = \bm{0}$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$Y \cap -Y = \bm{0}$</p>
+                        </div>
+                    </section>
+                    <section class="content" id="big-one-2">
+                        <p class="inter-title" id="big-one-2">Statement of The First Theorem</p>
+                        <div class="align-left">
+                            <p class="fragment fade-in-then-semi-out"> For any economic system satisfying the following assumptions:</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">The set of consumption vectors $X_i$ available to individual $i (=1,...,m)$ is a closed convex subset of $\R^l$
+                                which is bounded from below; i.e, there is a vector $\xi_i$ such that $\xi_i \leqq x_i$ for all $x_i \in X_i$.</p>
+                        </div>
+                    </section>
+                    <section class="content" id="big-one-3">
+                        <p class="inter-title" id="big-one-3">Statement of The First Theorem</p>
+                        <div class="align-left">
+                            <p class="fragment fade-in-then-semi-out"> For any economic system satisfying the following assumptions:</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$u_i(x_i) \geq u_i(x'_i) \iff x_i \succsim x_i'$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$u_i(x_i)$ is a continuous function on $X_i$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For any $x_i \in X_i$, there is an $x_i'$, such that $u_i(x_i') > u_i(x_i)$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">If $u_i(x_i) > u_i(x_i')$ and $0 < t < 1$ then $u_i[tx_i + (1-t)x_i']  > u_i(x_i')$</p>
+                        </div>
+                    </section>
+                    <section class="content" id="big-one-4">
+                        <p class="inter-title" id="big-one-4">Statement of The First Theorem</p>
+                        <div class="align-left">
+                            <p class="fragment fade-in-then-semi-out">For any economic system satisfying the following assumptions:</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$\zeta_i \in \R^l$; for some $x_i \in X_i$, $x_i < \zeta_i$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For all $i,j$, $\alpha_{ij} \geqq 0$; for all $j$, $\sum_{i=1}^m \alpha_{ij} = 1$</p>
+                            <p class="fragment fade-in-then-semi-out">There exists a competitive equilibrium</p>
+                        </div>
+                    </section>
+                </section>
+                <section class="content" id="economy">
+                    <section class="content" id="economy1">
+                        <p class="inter-title">A Lemma on Abstract Economies</p>
+                        <div class="align-left">
+                            <!-- <p class="fragment fade-in-then-semi-out">What is an abstract economy?</p> -->
+                            <p class="fragment fade-in-then-semi-out">Let $U_\iota \subseteq \R^l$ for $\iota = (1....\upsilon)$</p>
+                            <p class="fragment fade-in-then-semi-out">Let $U = U_1 \times U_2 \times ... \times U_\iota$ 
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">This represents the set of ordered $\upsilon$-tuples $a = (a_1,...,a_\upsilon)$ where $a_\iota \in U_\iota$</p>
+                            <p class="fragment fade-in-then-semi-out">For each $\iota$, let $f_\iota: U \rightarrow \R$</p>
+                            <p class="fragment fade-in-then-semi-out">Let $\overline{U_\iota} = U_1 \times U_2 \times ... \times U_{\iota-1} \times U_{\iota + 1} \times ... \times U_{\upsilon}$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">This represents the set of ordered $(\upsilon -1)$-tuples $\overline{a_\iota} = (a_1,...,a_{\iota-1},a_{\iota+1},...,a_\upsilon)$ where $a'_\iota \in U'_\iota$ for all $\iota' \not = \iota$</p>
+                            <p class="fragment fade-in-then-semi-out">Let $A_\iota(\overline{a}_\iota) \subseteq U_\iota$ be a function for each $\overline{a_\iota} \in \overline{U_\iota}$</p>
+                            <p class="fragment fade-in-then-semi-out">Thus an abstract economy is defined as $[U_1,...,U_\upsilon,f_1,...,f_\upsilon,A_1(\overline{a_1}),...,A_\upsilon(\overline{a_\upsilon})]$</p>
+                        </div>
+                    </section>
+                    <section class="content" id="economy2">
+                        <p class="inter-title">A Lemma on Abstract Economies</p>
+                        <div class="align-left">
+                            <p class="fragment fade-in-then-semi-out">Since $A_\iota(\overline{a}_\iota) \subseteq U_\iota$ (where $A_\iota(a_\iota)$ is a continuous multi-valued function)</p>
+                            <p class="fragment fade-in-then-semi-out">Let an agent $\iota$ choose an action $a_\iota \in U_\iota$</p>
+                            <p class="fragment fade-in-then-semi-out">If $f_\iota(a)$ assigns an amount (payoff) received by agent $\iota$</p>
+                            <p class="fragment fade-in-then-semi-out">Thus an abstract economy can treated closely to a game! Extending Nash definition of an equilibrium for a game...</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$a^*$ is an equilibrium point of $[U_1,...,U_\upsilon,f_1,...,f_\upsilon,A_1(\overline{a_1}),...,A_\upsilon(\overline{a_\upsilon})]$ if for all $\iota = 1,..,\upsilon$, $a^*_\iota \in A_\iota(\overline{a}_\iota)$ and $f_\iota(a^*, \overline{a^*}) = \argmax f_\iota(a, \overline{a^*})$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">An equilibrium is defined when each agent is maximizing their payoff over the set of their available actions given other agents' actions</p> 
+                        </div>
+                    </section>
+                    <section class="content" id="economy3">
+                        <p class="inter-title">A Lemma on Abstract Economies</p>
+                        <div class="align-left">
+                            <p class="fragment fade-in-then-semi-out">If</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For each $\iota$, $U_\iota$ (choice set) is compact and convex and $f_\iota(\overline{a_\iota}, a_\iota)$ (payoff function) is continuous on $U$ and quasi-concave in $a_\iota$</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For every $a_\iota$, $A_\iota(\overline{a_\iota})$ (best response correspondence) is convex, nonempty and is a continuous function whose graph is a closed set</p>
+                            <p class="fragment fade-in-then-semi-out">Then</p>
+                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">The abstract economy $[U_1,...,U_\upsilon,f_1,...,f_\upsilon,A_1(\overline{a_1}),...,A_\upsilon(\overline{a_\upsilon})]$ has an equilibrium point</p>
+                            <p class="fragment fade-in-then-semi-out">This lemma generalizes Nash's theorem on the existence of equilibrium points for games</p>
+                        </div>
+                    </section>
+                </section>
+                <section class="content" id="proof1">
+                    <p class="inter-title">Proof</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Consider $m + n + 1$ participants in an abstract economy $E$, where $m$ are consumers, $n$ are firms and an arbitrary, imaginary market participant </p> 
+                        <p class="fragment fade-in-then-semi-out">For any conusmer $i$, let $\overline{x_i} \in X_1 \times ... \times X_{i-1} \times X_{i+1} \times ... \times X_m \times Y_1 \times ... \times Y_n \times P$</p> 
+                        <p class="fragment fade-in-then-semi-out">Define $A_i(\overline{x_i}) = \{x_i | x_i \in X_i, p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then define the abstract economy $E = [X_1,...,X_m,Y_1,...,Y_n,P, u_1(x_1),...,u_m(x_m),p\cdot y_1,...,p\cdot y_n, p\cdot z, A_1(\overline{x_1}),...,A_m(\overline{x_m})]$</p> 
+                        <p class="fragment fade-in-then-semi-out">There are $m$ participants, each chooses $x_i \in X_i$ subject to restriction $x_i \in A_i(\overline{x_i})$ and gets $u_i(x_i)$ payoff</p> 
+                        <p class="fragment fade-in-then-semi-out">There are $n$ firms, each chooses $y_j$ from $Y_j$ and receives payoff $p \cdot y_j$</p> 
+                        <p class="fragment fade-in-then-semi-out">Imaginary participant chooses $p \in P$ and receives $p \cdot z$</p> 
+                    </div>
+                </section>
+                <section class="content" id="proof2">
+                    <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Note $A_i(\overline{x_i}) = \{x_i | x_i \in X_i, p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">$max$ function is chosen to avoid $A_i(\overline{x_i})$ from being an empty set</p> 
+                        <p class="fragment fade-in-then-semi-out" style = "margin-left: 1.5em;">For some $x'_i \in X_i$, $\zeta_i \geqq x'_i \implies p\cdot \zeta_i \geqq p \cdot x'_i$</p> 
+                        <p class="fragment fade-in-then-semi-out" style = "margin-left: 1.5em;">Then $p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)] \geqq p\cdot \zeta_i \geqq p\cdot x'_i$</p> 
+                        <p class="fragment fade-in-then-semi-out">At E-equilibrium, there is no difference as <br>$p^* \cdot y_j^* \geqq p^*\cdot 0 = 0 \implies max[0, \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)] = \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)$</p> 
+                        <p class="fragment fade-in-then-semi-out" style= "margin-left: 1.5em;">$A_i(\overline{x^*_i}) = \{x_i | x_i \in X_i, p^*\cdot x_i \leqq p^*\cdot \zeta_i + \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Condition 2 (C2) satisfied at E-equilibrium</p> 
+                    </div>
+                </section>
+                <section class="content" id="proof3">
+                    <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Condition 1 (C1) is satisfied from the definition of equilibrium point</p> 
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Firm $j$ chooses payoff maximizing $y^*_j \in Y_j$ at equilibrium in view of other firms' production plans</p> 
+                        <p class="fragment fade-in-then-semi-out">Condition 3 (C3) is also satisfied</p> 
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Trivially $p^* \geqq 0$ at equilibrium (hopefully, all commodities aren't free)</p> 
+                    </div>
+                </section>
+                <section class="content" id="proof4">
+                    <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">From definition of $z$ (excess demand over supply), $p^* \cdot z^* = 0$ for market clearing</p> 
+                        <p class="fragment fade-in-then-semi-out">Let $\delta^h \in P$ where $\delta^h = (0,...,1,...,0)$ for some index $h$ (only one commodity has a non-negative price)</p> 
+                        <p class="fragment fade-in-then-semi-out">Then $0 = p^* \cdot z^* \geqq \delta^h \cdot z^* = z^*_h$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then $z^* \leqq 0$</p> 
+                        <p class="fragment fade-in-then-semi-out">Thus Condition 4 (C4) along with C1 - C3 have been satisfied!</p> 
+                        <p class="fragment fade-in-then-semi-out">Done?</p> 
+                        <p class="fragment fade-in-then-semi-out">No. Sorry.</p> 
+                    </div>
+                </section>
+                <section class="content" id="proof5">
+                    <p class="inter-title">Action Space Definition</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Define $\hat{X_i}$, $\hat{Y_j}$</p> 
+                        <p class="fragment fade-in-then-semi-out">$\hat{X_i} = \{x_i | x_i \in X_i,$ there exists $x_{i'} \in X_{i'}$ for each $i' \neq i$, $y_j \in Y_j$ for each $j$ such that $z\leqq 0\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">$\hat{Y_j} = \{y_j | y_j \in Y_j,$ there exists $x_i \in X_i$ for each $i$, $y_{j'} \in Y_{j'}$ for each $j' \neq j$ such that $z\leqq 0\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">These are consumption and production sets available to firm $i$ and $j$ as though they had complete control of the economy</p> 
+                        <p class="fragment fade-in-then-semi-out">Note $x^*_i \in \hat{X_i}$ and $y^*_j \in \hat{Y_j}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Need to show action spaces $\hat{X_i}$, $\hat{Y_j}$ are compact</p> 
+                    </div>
+                </section>
+                <section class="content" id="proof6">
+                    <p class="inter-title">Compactness of $\hat{Y_j}$</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">For the sake of contradiction suppose $\hat{Y_1}$ is unbounded. Let $y^k_j \in Y_j$ and $x^k_i \in X_i$ be sequences</p> 
+                        <p class="fragment fade-in-then-semi-out">Let $\lim_{k \to \infty} |y^k_1| = \infty$ and $\sum_{j=1}^n y_j^k \geqq \sum_{i=1}^m x_i^k - \zeta$ <i style="color: red;">(1)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Since $\xi = \sum_{i=1}^m \xi_i$ and $x_i \geqq \xi_i$ for all $i$, it follows $\sum_{j=1}^n y_j^k \geqq \xi - \zeta$ <i style="color: red;">(2)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Let $\mu^k = max_j |y_j^k|$ such that $\mu^k \geqq 1$ for a large $k$. <br>Then by convexity of $Y_j: (1/\mu^k)y^k_j + (1-1/\mu^k)0 \implies y^k_j / \mu^k \in Y_j$<i style="color: red;">(3)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Then from <i style="color: red;">(2)</i> $\sum_{j=1}^n(y_j^k/\mu^k) \geqq (\xi - \zeta)/\mu^k$<i style="color: red;">(4)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Then $\lim_{k \to \infty} \mu^k = \infty$ from <i style="color: red;">(1)</i> and thus $|y_j^k / \mu^k| \leqq 1$<i style="color: red;">(5)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">By Bolzano-Weierstrass choose a subsequence $\{k_q\}$ such that for all $j$, $\lim_{q \to \infty} y^{k_q}_j/\mu^{k_q} = y_j^o$<i style="color: red;">(6)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">From <i style="color: red;">(4)</i> and <i style="color: red;">(6)</i> $\sum_{j=1}^n y_j^o \geqq 0$ and since $Y_j$ is closed, $y_j^o \in Y_j$<i style="color: red;">(7)</i></p> 
+                    </div>
+                </section>
+                <section class="content" id="proof7">
+                    <p class="inter-title">Compactness of $\hat{Y_j}$</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Since $\sum_{j=1}^n y_j^o \geqq 0$ and $y_j^o \in Y_j$ (by closure) then $\sum_{j=1}^n y_j^o \in Y$ (total production set)<i style="color: red;">(8)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">However since $\sum_{j=1}^n y_j^o \geqq 0$, then $\sum_{j=1}^n y_j^o = 0$ by A1 (at least one negative component needed)<i style="color: red;">(9)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Rearranging <i style="color: red;">(9)</i> $\sum_{j\neq j'}y_j^o = -y^o_{j'}$<i style="color: red;">(10)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Since $0 \in Y$ then $y_{j'}^o \in Y$ and thus $-y_{j'}^o \in -Y$ (additive inverse set)<i style="color: red;">(11)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">But from <i style="color: red;">(10)</i> $\sum_{j\neq {j'}}y_j^o = -y_{j'}^o \in Y$. So $-y_{j'}^o \in -Y$ and $-y_{j'}^o \in Y$ thus $y_{j'}^o = 0$ by A1<i style="color: red;">(12)</i></p> 
+                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Since $\lim_{q \to \infty} y^{k_q}_j/\mu^{k_q} = y_j^o = 0$, the equality $|y_j^{k_q}| = \mu^{k_q}$  is only true for a finite number of $q$ <i style="color: red;">(13)</i></p> 
+                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Considering the definition of $\mu^{k_q} = max_j|y^{k_q}|$, there exists a max L-2 norm for at least one $j$ for every $q$. Contradiction!<i style="color: red;">(14)</i></p> 
+                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Hence WLOG $\hat{Y_1}$ is bounded so is $\hat{Y_j}$ for all $j$. Since $\hat{Y_j}$ closed and bounded, it is compact.</p>
+                    </div>
+                </section>
+                <section class="content" id="proof8">
+                    <p class="inter-title">Compactness of $\hat{X_i}$</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Let $x_i \in \hat{X_i}$ then $\xi_i \leqq x_i \leqq \sum_{j=1}^{n} y_j - \sum_{i' \neq i} x_{i'} + \zeta$ <i style="color: red;">(1)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Since $y_j \in \hat{Y_j}$ for all $j$ and $\xi_{i'} \leqq x_{i'}$ for all $i'$ then $\xi_i \leqq x_i \leqq \sum_{j=1}^{n} y_j - \sum_{i' \neq i} xi_{i'} + \zeta$ <i style="color: red;">(2)</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Since $\hat{Y_j}$ is bounded, the term $\sum_{j=1}^{n} y_j - \sum_{i' \neq i} xi_{i'} + \zeta$ is bounded <i style="color: red;">(3)</i></p>
+                        <p class="fragment fade-in-then-semi-out">Hence from <i style="color: red;">(3)</i>, $\hat{X_i}$ is bounded for all $i$. It has been proven $\hat{X_i}$ and $\hat{Y_j}$ are compact.</p> 
+                    </div>
+                </section>
+                <section class="content" id="proof9">
+                    <p class="inter-title">Abstract Economy - So Far</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Let there be a positive real $c$ such that a cube is defined as $C = \{x | |x_h| \leqq c$  $\forall h\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">$\hat{X_i} \subseteq int C$ for all $i$ and $\hat{Y_j} \subseteq int C$ for all $j$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then let $\tilde{X_i} = X_i \cap C$ and $\tilde{Y_j} = Y_j \cap C$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then $\tilde{X_i}$ and $\tilde{Y_j}$ are compact and convex (since $C$ is compact & convex, and $X_i, Y_j$ is closed & convex)</p> 
+                        <p class="fragment fade-in-then-semi-out">$P$ is also compact & convex</p> 
+                        <p class="fragment fade-in-then-semi-out">Consumer payoff $u_i(x_i)$ is continuous, quasi-concave by A3 and Producer payoff & Market participant payoff $p\cdot y_j$, $p \cdot z$ is also continuous</p>
+                        <p class="fragment fade-in-then-semi-out">Recall $\tilde{E} = $<i style="color: red;">$[\tilde{X_1},..,\tilde{X_m},\tilde{Y_1},..,\tilde{Y_n},P, u_1(x_1),..,u_m(x_m),p\cdot y_1,..,p\cdot y_n, p\cdot z,$</i>$\tilde{A_1}(\overline{x_1}),..,\tilde{A_m}(\overline{x_m})]$</p>
+                    </div>
+                </section>
+                <section class="content" id="proof10">
+                    <p class="inter-title">Best Response Correspondence</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is <i style = "color: green;">non-empty</i>, convex, continuous, and its graph is closed</p> 
+                        <p class="fragment fade-in-then-semi-out">Recall $A_i(\overline{x_i})$ is defined by $\{x_i | x_i \in X_i, p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]\}$</p> 
+                        <p class="fragment fade-in-then-semi-out">For each $i$, $x'_i \in X_i \implies x'_i \leqq \zeta_i$ and let $y'_j =0$ then $\sum_{i=1}^{m}x'_i - \sum_{j=1}^n y'_j(=0) - \zeta \leqq 0$</p> 
+                        <p class="fragment fade-in-then-semi-out">Thus $x'_i \in \hat{X_i} \subseteq C$</p> 
+                        <p class="fragment fade-in-then-semi-out">Define $\tilde{A_i}(\overline{x_i}) = C \cap A_i(\overline{x_i})$</p> 
+                        <p class="fragment fade-in-then-semi-out">Since $x'_i \in C$ then $x'_i \in \tilde{A_i}(\overline{x_i})$ thus $\tilde{A_i}(\overline{x_i})$ is <i style = "color: green;">non-empty</i></p>
+                    </div>
+                </section>
+                <section class="content" id="proof11">
+                    <p class="inter-title">Best Response Correspondence</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is non-empty, <i style = "color: green;">convex</i>, continuous, and its graph is closed</p> 
+                        <p class="fragment fade-in-then-semi-out">$\tilde{A_i}(\overline{x_i})$ is characterized by the inequality $p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then for some $0 \leqq t \leqq 1$, and $x'_i \in \tilde{A_i}(\overline{x_i})$ it follows that all points $(t x_i + (1-t)x'_i) \in \tilde{A_i}(\overline{x_i})$</p> 
+                        <p class="fragment fade-in-then-semi-out">Hence $\tilde{A_i}(\overline{x_i})$ is <i style="color: green;">convex</i></p> 
+                    </div>
+                </section>
+                <section class="content" id="proof12">
+                    <p class="inter-title">Best Response Correspondence</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is non-empty, convex, continuous, and its <i style = "color: green;">graph is closed</i></p> 
+                        <p class="fragment fade-in-then-semi-out">Define sequences $\{\overline{x_i^k}\} \rightarrow \overline{x_i}$ and $\{x_i^k\} \rightarrow x_i$. Then for each $k$, $x_i^k \in \tilde{A_i}(\overline{x^k_i})$ by definition of $\tilde{A_i}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Since $x_i \in \tilde{A_i}(\overline{x_i})$, the graph contains the limit point and is <i style = "color: green;">closed</i></p> 
+                    </div>
+                </section>
+                <section class="content" id="proof13">
+                    <p class="inter-title">Best Response Correspondence</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is non-empty, convex, <i style = "color:green;">continuous</i>, and its graph is closed</p> 
+                        <p class="fragment fade-in-then-semi-out">Show if $p\cdot \zeta_i > min_{x_i} p\cdot x_i$ then $\tilde{A_i}(\overline{x_i})$ is continuous at $\overline{x_i}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Omitted for brevity</p>
+                    </div>
+                </section>
+                <section class="content" id="proof14">
+                    <p class="inter-title">Validation of $z^*$ For Competitive Economy</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">It has been shown that the equilibrium point $(x^*_1,...,x^*_m,y^*_1,...,y^*_n,p^*)$ exists for $\tilde{E}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Show that this point is the equilibrium for $E$ (competitive equilibrium)</p> 
+                        <p class="fragment fade-in-then-semi-out">At $y^*$ we know $max[0, \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)] = \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then from $\tilde{A_i}(\overline{x_i})$, it follows $p^* \cdot x_i^* \leqq p^* \cdot \zeta_i+ \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then $p^*\cdot x^* \leqq p^* \cdot \zeta + p^*\cdot y^* \implies p^*\cdot z^* \leqq 0$</p> 
+                        <p class="fragment fade-in-then-semi-out">Using a $\delta_h \leqq p^*$, it can be established that $z^* \leqq 0$ <i style = "color: red;">(Condition 4)</i></p> 
+                    </div>
+                </section>
+                <section class="content" id="proof15">
+                    <p class="inter-title">Validation $x^*$ For Competitve Economy</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">It is known $x^*_i \in \hat{X_i} \subseteq int C$</p> 
+                        <p class="fragment fade-in-then-semi-out">Let $x'_i \in A_i(\overline{x^*_i})$ then $u_i(x'_i) > u_i(x^*_i)$ and $u_i[tx'_i + (1-t)x^*_i] > u_i(x^*_i)$ for $0 < t < 1$</p> 
+                        <p class="fragment fade-in-then-semi-out">Since $C$ is compact, convex, $tx'_i + (1-t)x^*_i \in C$</p> 
+                        <p class="fragment fade-in-then-semi-out">Then by convexity $tx'_i + (1-t)x^*_i \in A_i(\overline{x^*_i})$ and $tx'_i + (1-t)x^*_i \in \tilde{A_i}(\overline{x^*_i})$</p> 
+                        <p class="fragment fade-in-then-semi-out">This contradicts $x^*$ as an equilibrium for $\tilde{E}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Thus $x^*_i$ maximizes $u_i(x_i)$ for $x_i \in A_i(\overline{x_i})$ <i style = "color: red;">(Condition 2)</i></p>
+                    </div>
+                </section>
+                <section class="content" id="proof16">
+                    <p class="inter-title">Validate $y^*$ For Competitive Economy</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">A similar argument shows that if $y'_j \in Y_j$ such that $p^*y'_j > p^*\cdot y^*_j$, then $p^*\cdot [ty'_j + (1-t)y^*_j] > p^*\cdot y^*_j$</p>
+                        <p class="fragment fade-in-then-semi-out">Thus $y'_j \in C$ as $C$ is compact, convex and $y'_j \in \tilde{Y_j}$</p>
+                        <p class="fragment fade-in-then-semi-out">This contradicts $y^*$ as an equilibrium for $\tilde{E}$</p>
+                        <p class="fragment fade-in-then-semi-out">Thus $y^*_i$ maximizes $p^*\cdot y_j$ for $y_j \in Y_j$ <i style="color: red;">(Condition 1)</i></p>
+                    </div>
+                </section>
+                <section class="content" id="proof17">
+                    <p class="inter-title">Validate $p^*$ For Competitive Economy</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Finally $p^*$ maximizes $p\cdot z^*$ for $p \in P$ is true for both $E$ and $\tilde{E}$ <i style="color: red;">(Condition 3)</i></p>
+                        <p class="fragment fade-in-then-semi-out">All conditions (C1-C4) for competitive equilibrium have been satisfied for $E$ under the assumptions (A1-A4), thus it is a competitive equilibrium at $(x^*_1,...,x^*_m,y^*_1,...,y^*_n,p^*)$</p>
+                        <p class="fragment fade-in-then-semi-out">Fin</p>
+                    </div>
+                </section>
+                <section class="content" id="final">
+                    <p class="inter-title">Thank you</p>
+                    <p style="font-size: 0.7em;">This presentation was done using JavaScript, D3.js (for visualizations) and Reveal.js (for slides)</p>
+                </section>
+			</div>
+		</div>
+
+		<script src="reveal.js/dist/reveal.js"></script>
+		<script src="reveal.js/plugin/notes/notes.js"></script>
+		<script src="reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="reveal.js/plugin/highlight/highlight.js"></script>
+        <script src="reveal.js/plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+
+			});
+
+            Reveal.on('slidechanged', function(event) {
+                var currentSlide = event.currentSlide;
+                if (currentSlide.id === "firms1"){
+                    prodClosedConvex(currentSlide);
+                }
+                else if (currentSlide.id === "firms3") {
+                    innerProd(currentSlide);
+                }
+                else if (currentSlide.id === "consumers1") {
+                    consClosedConvex(currentSlide);
+                }
+                else if (currentSlide.id === "consumers2") {
+                    utilityFunction(currentSlide);
+                }
+            });
+
+
+
+		</script>
+
+	</body>
+</html>
