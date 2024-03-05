@@ -99,7 +99,7 @@
             .reveal .slides .fig-title {
                 font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 text-align: left; 
-                margin-left: 67%; 
+                margin-left: 70%; 
                 font-size: 0.75em;
             }
         </style>
@@ -179,13 +179,16 @@
                     <p class="inter-title">Prisoner's Dilemma</p>
                     <p class="fig-title">Payoff Matrix</p>
                     <div class ="align-left">
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Two criminals are caught committing a crime...</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Their strategies are $S = \{silent, defect\}$ and both are aware of each other's strategies.</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Payoffs are defined in years of freedom from prison sentence (3 means 3 years of freedom earned)</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Regardless of what player <b style="color: red">2</b> does, player <b style="color: blue;">1</b> is better off defecting! (By symmetry, player <b style="color: red;">2</b> will do the same)</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Takeaway? Socially inefficient equilibrium! &#129327;</p>
+
                     </div>
-                    <script src="animations/prodClosedConvex.js"></script>
+                    <script src="animations/prisonersDilemma.js"></script>
                 </section>
-                <section class="content" id="firms2">
+                <!-- <section class="content" id="firms2">
                     <p class="inter-title">A1 Production Possibilities</p>
                     <div class="align-left">
                         <p class="fragment fade-in-then-semi-out">If $0 \leqq \lambda \leqq 1$ then $\lambda y_j = \lambda y_j + (1 - \lambda)0 \in Y_j$ implies convexity as $0 \in Y_j$</p>
@@ -248,8 +251,8 @@
                                                                                                                                             &= p^*_1y_{j1} + p^*_2y_{j2} + ... + p^*_ly_{jl}\end{align*}\]</p>
                         <p class="fragment fade-in-then-semi-out">Given an equilibrium price vector $p^*$, firm $j$ is maximizing profit for each $j$</p>
                     </div>
-                    <!-- <script src="animations/innerProd.js"></script> -->
-                </section>
+                        <script src="animations/innerProd.js"></script> -->
+                <!-- </section>
                 <section class="content" id="consumers5">
                     <p class="inter-title" id="consumers5">C2 Distribution of Wealth and Income</p>
                     <div class="align-left">
@@ -347,7 +350,7 @@
                     <section class="content" id="economy1">
                         <p class="inter-title">A Lemma on Abstract Economies</p>
                         <div class="align-left">
-                            <!-- <p class="fragment fade-in-then-semi-out">What is an abstract economy?</p> -->
+                            <p class="fragment fade-in-then-semi-out">What is an abstract economy?</p>
                             <p class="fragment fade-in-then-semi-out">Let $U_\iota \subseteq \R^l$ for $\iota = (1....\upsilon)$</p>
                             <p class="fragment fade-in-then-semi-out">Let $U = U_1 \times U_2 \times ... \times U_\iota$ 
                             <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">This represents the set of ordered $\upsilon$-tuples $a = (a_1,...,a_\upsilon)$ where $a_\iota \in U_\iota$</p>
@@ -558,7 +561,7 @@
                         <p class="fragment fade-in-then-semi-out">All conditions (C1-C4) for competitive equilibrium have been satisfied for $E$ under the assumptions (A1-A4), thus it is a competitive equilibrium at $(x^*_1,...,x^*_m,y^*_1,...,y^*_n,p^*)$</p>
                         <p class="fragment fade-in-then-semi-out">Fin</p>
                     </div>
-                </section>
+                </section> -->
                 <section class="content" id="final">
                     <p class="inter-title">Thank you</p>
                     <p style="font-size: 0.7em;">This presentation was done using JavaScript, D3.js (for visualizations) and Reveal.js (for slides)</p>
@@ -585,18 +588,18 @@
 
             Reveal.on('slidechanged', function(event) {
                 var currentSlide = event.currentSlide;
-                if (currentSlide.id === "firms1"){
-                    prodClosedConvex(currentSlide);
+                if (currentSlide.id === "prisoners-dilemma"){
+                    prisonersDilemma(currentSlide);
                 }
-                else if (currentSlide.id === "firms3") {
-                    innerProd(currentSlide);
-                }
-                else if (currentSlide.id === "consumers1") {
-                    consClosedConvex(currentSlide);
-                }
-                else if (currentSlide.id === "consumers2") {
-                    utilityFunction(currentSlide);
-                }
+                // else if (currentSlide.id === "firms3") {
+                //     innerProd(currentSlide);
+                // }
+                // else if (currentSlide.id === "consumers1") {
+                //     consClosedConvex(currentSlide);
+                // }
+                // else if (currentSlide.id === "consumers2") {
+                //     utilityFunction(currentSlide);
+                // }
             });
 
 
