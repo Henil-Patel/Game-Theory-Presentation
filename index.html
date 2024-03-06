@@ -150,30 +150,19 @@
                         <!-- <p class="fragment fade-in-then-semi-out"></p> -->
                     </div>
                 </section>
-                <section class ="content" id="model">
-                    <section class = "content">
-                        <p class = "inter-title">Model</p>
-                        <div class ="align-left">
-                            <p class="fragment fade-in-then-semi-out">$P$ - set of players $p_i$ for all $i = 1...n$</p>
-                            <p class="fragment fade-in-then-semi-out">$S_i$ - set of strategies $s_i$ open to player $i$</p>
-                            <p class="fragment fade-in-then-semi-out">$u: S_i \times S_{i'} \rightarrow \R$ - payoff function for player $i$ choosing strategy $s_i$ given strategies chosen by $i'$ players</p>
-                            <!-- <p class="fragment fade-in-then-semi-out"></p>
-                            <p class="fragment fade-in-then-semi-out"></p>
-                            <p class="fragment fade-in-then-semi-out"></p>
-                            <p class="fragment fade-in-then-semi-out"></p>
-                            <p class="fragment fade-in-then-semi-out"></p>
-                            <p class="fragment fade-in-then-semi-out"></p> -->
-                        </div>
-                    </section>
-                    <!-- <section class="content">
-                        <p class = "inter-title">Model</p>
-                        <div class = "align-left">
-                            <p class="fragment fade-in-then-semi-out">$\xi_i$ : lower bound for consumption set $X_i$</p>
-                            <p class="fragment fade-in-then-semi-out">$\mathcal{L}$ : set of commodities which represent labor services</p>
-                            <p class="fragment fade-in-then-semi-out">$\zeta_i$ : initial holdings (endowments) in $\R^l$ of individual $i$</p>
-                            <p class="fragment fade-in-then-semi-out">$\alpha_{ij}$ : share of profit for individual $i$ by firm $j$</p>
-                        </div>
-                    </section> -->
+                <section class ="content" id="model0">
+                    <p class = "inter-title">Model</p>
+                    <div class ="align-left">
+                        <p class="fragment fade-in-then-semi-out">$P$ - set of players $i = 1...n$</p>
+                        <p class="fragment fade-in-then-semi-out">$S_i$ - set of strategies $s_i$ open to player $i$</p>
+                        <p class="fragment fade-in-then-semi-out">$u: S_i \times S_{i'} \rightarrow \R$ - payoff function for player $i$ choosing strategy $s_i$ given strategies chosen by $i'$ players</p>
+                        <!-- <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p>
+                        <p class="fragment fade-in-then-semi-out"></p> -->
+                    </div>
                 </section>
                 <section class="content" id="prisoners-dilemma">
                     <p class="inter-title">Prisoner's Dilemma</p>
@@ -188,51 +177,54 @@
                     </div>
                     <script src="animations/prisonersDilemma.js"></script>
                 </section>
-                <!-- <section class="content" id="firms2">
-                    <p class="inter-title">A1 Production Possibilities</p>
+                <section class="content" id="best-response">
+                    <p class="inter-title">Best Response</p>
                     <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">If $0 \leqq \lambda \leqq 1$ then $\lambda y_j = \lambda y_j + (1 - \lambda)0 \in Y_j$ implies convexity as $0 \in Y_j$</p>
-                        <p class="fragment fade-in-then-semi-out">Closure of $Y_j$ implies that if vectors arbitrarily close to $y_j$ are in $Y_j$ then so is $y_j$</p>
-                        <p class="fragment fade-in-then-semi-out">At least one component of $y_j$ must be negative i.e,</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-left: auto; margin-right: auto;">ex: $y_j = (-1,0,-1,2,0,...,1)$</p>
-                        <p class="fragment fade-in-then-semi-out">If $y_j \in Y$ then $-y_j \not\in Y$</p>
-                        <p class="fragment fade-in-then-semi-out">Let a firm use $(y_{j1},...,y_{jk}) < 0$ inputs to produce $(y_{jk+1},...,y_{jh}) > 0$ outputs then $-y_j \in Y$ would imply that $(y_{jk+1},...,y_{jh}) < 0$ inputs can be used to produce $(y_{j1},...,y_{jk}) > 0$ outputs</p>
-                        <p class="fragment fade-in-then-semi-out">Does not work in case of labor!</p>
+                        <p class="fragment fade-in-then-semi-out">Best Response: $s_i$ is a best response for player $i$ to rivals' strategies $s_{-i}$ if:</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-left: auto; margin-right: auto;">$u_i(s_i, s_{-i}) \geq u_i(s_{i'}, s_{-i})$ , $\forall s_{i'} \in S_i$</p>
+                        <p class="fragment fade-in-then-semi-out">Denoted as $s_i \in BR(s_{-i})$</p>
+                        <p class="fragment fade-in-then-semi-out">...if payoff from playing $s_i$ is at least as good as payoff from playing any $s_i'$, then $s_i$ is a best response (given other players have played $s_{-i}$)</p>
+                        <p class="fragment fade-in-then-semi-out">Note the comparison is a weak inequality - this is to accomodate multiple best responses</p>
                     </div>
                 </section>
-                <section class="content" id="consumers1">
-                    <p class="inter-title" id="consumers1">A2 Consumption Possibilities</p>
-                    <p class="fig-title">Visualizing $X_i$ in $\R^2$</p>
+                <section class="content" id="nash-equilibrium">
+                    <p class="inter-title">Nash Equilibrium</p>
                     <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">The set of consumption vectors $X_i$ available to individual $i (=1,...,m)$ is a closed convex subset of $\R^l$
-                                                                    which is <b>bounded</b> from below; i.e, there is a vector <b style="color: red;">$\xi_i$</b> such that $\xi_i \leqq x_i$ for all $x_i \in X_i$.
-                        </p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">$\xi_i$ must exist to ensure that commodities like labour input $x_{hi}$ cannot exceed 24 hours</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%">$\xi_i$ also ensures that consumption bundles insufficient to sustain life are excluded</p>
-                    </div>
-                    <script src="animations/consClosedConvex.js"></script>
-                </section>
-                <section class="content" id="consumers2">
-                    <p class="inter-title" id="consumers2">A3 Consumer Preferences</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">$u_i(x_i) \geq u_i(x'_i) \iff x_i \succsim x_i'$</p>
-                        <p class="fragment fade-in-then-semi-out">$u_i(x_i)$ is a continuous function on $X_i$</p>
-                        <p class="fragment fade-in-then-semi-out">For any $x_i \in X_i$, there is an $x_i'$, such that $u_i(x_i') > u_i(x_i)$</p>
-                        <p class="fragment fade-in-then-semi-out">If $u_i(x_i) > u_i(x_i')$ and $0 < t < 1$ <br> then $u_i[tx_i + (1-t)x_i']  > u_i(x_i')$ i.e, $u_i$ is quasi-concave</p>
-                    </div>
-                    <script src="animations/utilityFunction.js"></script>
-                </section>
-                <section class="content" id="consumers3">
-                    <p class="inter-title" id="consumers3">A3 Consumer Preferences</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out"><b style="color: red;">[Representation Theorem; Debreu 1954]</b> A continuous $u_i(x_i)$ is equivalent to the assumption:</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: auto; margin-left: auto;">$\forall x'_i$, the sets $\{x_i | x_i \in X_i , x_i \succsim x'_i\}$ and  $\{x_i | x_i \in X_i , x'_i \succsim x_i\}$ are closed in $X_i$</p>
-                        <p class="fragment fade-in-then-semi-out">...implies continuous preference relation $\succsim$</p>
-                        <p class="fragment fade-in-then-semi-out">No satiation point, i.e no vector that the individual prefers to all other vectors</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For all $x_i$ and any $\epsilon > 0$, $\exists x_i'$ s.t $||x'_i - x_i|| < \epsilon$ and $u_i(x'_i) > u_i(x_i)$</p>
+                        <p class="fragment fade-in-then-semi-out">Nash Equilibrium: A Nash equilibrium is a strategy profile $(s_1^*,..,s_n^*)$ such that for each player $i = 1,..,n$, $s_i^*$ is the best response to the other players' equilibrium strategies $s_{-i}^*$ i.e, $s_i^* \in BR(s_{-i}^*)$</p>
+                        <p class="fragment fade-in-then-semi-out">For example</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">Consider $i = 1,2$, then $s^*_1, s^*_2$ form a NE if</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">$u_1(s^*_1, s^*_2) \geq u_1(s_1, s^*_2)$, $\forall s_1 \in S_1$ AND</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">$u_2(s^*_2, s^*_1) \geq u_2(s_2, s^*_1)$, $\forall s_2 \in S_2$</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">...players have no incentive to deviate their strategy even if they know the other players' strategy</p>
+                        <p class="fragment fade-in-then-semi-out">Widely used result in economics, politics, philosophy, evolutionary biology and computer science</p>
                     </div>
                 </section>
-                <section class="content" id="consumers4">
+                 <section class="content" id="coordination-game">
+                    <p class="inter-title">Coordination Game</p>
+                    <p class="fig-title">Payoff Matrix</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">There can be more / less than one Nash equilibrium</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;"><b style="color: blue;">1</b> prefers concert to movies</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;"><b style="color: red;">2</b> prefers movies to concerts</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">But both would at least like to go to an event together</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Two NE in the coordination game</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Ex. rock, paper, scissor does not have a pure strategy Nash Equilibrium</p>
+                    </div>
+                    <script src="animations/coordinationGame.js"></script>
+                </section>
+                <section class="content" id="mixed-strategy">
+                    <p class="inter-title">Mixed Strategies</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Let set of M actions available to player $i$ be defined as $A_i = \{a^1_i, .., a^M_i\}$</p>
+                        <p class="fragment fade-in-then-semi-out">A mixed strategy $s_i = \{\sigma^1_i,..,\sigma^M_i\}$ where $\sigma_i^m$ indicates the probability that $i$ plays $a^m_i$</p>
+                        <p class="fragment fade-in-then-semi-out">Note that the sum of probabilities $\sigma^1_i+..+\sigma^M_i = 1$</p>
+                        <p class="fragment fade-in-then-semi-out">For example</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">In case of prisoner's dilemma, a strategy could be $s_i = \{1/3, 2/3\}$</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">where $1/3$ is the probabiliy that player defects, $2/3$ is probability that the player remains silent</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;"></p>
+                    </div>
+                </section>
+                <!--<section class="content" id="consumers4">
                     <p class="inter-title" id="consumers4">A4 Endowments</p>
                     <div class="align-left">
                         <p class="fragment fade-in-then-semi-out">$\zeta_i \in \R^l$; for some $x_i \in X_i$, $x_i < \zeta_i$</p>
@@ -591,9 +583,9 @@
                 if (currentSlide.id === "prisoners-dilemma"){
                     prisonersDilemma(currentSlide);
                 }
-                // else if (currentSlide.id === "firms3") {
-                //     innerProd(currentSlide);
-                // }
+                else if (currentSlide.id === "coordination-game") {
+                    coordinationGame(currentSlide);
+                }
                 // else if (currentSlide.id === "consumers1") {
                 //     consClosedConvex(currentSlide);
                 // }
