@@ -125,8 +125,6 @@
                         <p class = "fragment fade-in-then-semi-out"><b style="color: tomato;">(1950)</b> John Nash</p>
                         <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">"Equilibrium Points in n-Person Games" published</p>
                         <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Proved there exists a mixed strategy equilibrium in n-Person games (more on this later)</p>
-                        <!-- <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Players $P$ - set of the decision makers</p> -->
-                        <!-- <p class = "fragment fade-in-then-semi-out", style="text-indent: 1.5em;">Strategies $S$ - set of actions available to players</p> -->
                     </div>
                 </section>
                 <section class = "content" id="motivation">
@@ -306,116 +304,53 @@
                     </div>
                     <script src="animations/extensiveForm.js"></script>
                 </section>
-                <!-- <section class="content" id="big-one">
-                    <section class="content" id="big-one-1">
-                        <p class="inter-title" id="big-one1">Statement of The First Theorem</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out"> For any economic system satisfying the following assumptions:</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$Y_j$ is a closed convex subset of $\R^l$ containing <b style="color:tomato">$\bm{0}$</b> $\forall j$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$Y \cap \Omega = \bm{0}$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$Y \cap -Y = \bm{0}$</p>
-                        </div>
-                    </section>
-                    <section class="content" id="big-one-2">
-                        <p class="inter-title" id="big-one-2">Statement of The First Theorem</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out"> For any economic system satisfying the following assumptions:</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">The set of consumption vectors $X_i$ available to individual $i (=1,...,m)$ is a closed convex subset of $\R^l$
-                                which is bounded from below; i.e, there is a vector $\xi_i$ such that $\xi_i \leqq x_i$ for all $x_i \in X_i$.</p>
-                        </div>
-                    </section>
-                    <section class="content" id="big-one-3">
-                        <p class="inter-title" id="big-one-3">Statement of The First Theorem</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out"> For any economic system satisfying the following assumptions:</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$u_i(x_i) \geq u_i(x'_i) \iff x_i \succsim x_i'$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$u_i(x_i)$ is a continuous function on $X_i$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For any $x_i \in X_i$, there is an $x_i'$, such that $u_i(x_i') > u_i(x_i)$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">If $u_i(x_i) > u_i(x_i')$ and $0 < t < 1$ then $u_i[tx_i + (1-t)x_i']  > u_i(x_i')$</p>
-                        </div>
-                    </section>
-                    <section class="content" id="big-one-4">
-                        <p class="inter-title" id="big-one-4">Statement of The First Theorem</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out">For any economic system satisfying the following assumptions:</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$\zeta_i \in \R^l$; for some $x_i \in X_i$, $x_i < \zeta_i$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For all $i,j$, $\alpha_{ij} \geqq 0$; for all $j$, $\sum_{i=1}^m \alpha_{ij} = 1$</p>
-                            <p class="fragment fade-in-then-semi-out">There exists a competitive equilibrium</p>
-                        </div>
-                    </section>
-                </section>
-                <section class="content" id="economy">
-                    <section class="content" id="economy1">
-                        <p class="inter-title">A Lemma on Abstract Economies</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out">What is an abstract economy?</p>
-                            <p class="fragment fade-in-then-semi-out">Let $U_\iota \subseteq \R^l$ for $\iota = (1....\upsilon)$</p>
-                            <p class="fragment fade-in-then-semi-out">Let $U = U_1 \times U_2 \times ... \times U_\iota$ 
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">This represents the set of ordered $\upsilon$-tuples $a = (a_1,...,a_\upsilon)$ where $a_\iota \in U_\iota$</p>
-                            <p class="fragment fade-in-then-semi-out">For each $\iota$, let $f_\iota: U \rightarrow \R$</p>
-                            <p class="fragment fade-in-then-semi-out">Let $\overline{U_\iota} = U_1 \times U_2 \times ... \times U_{\iota-1} \times U_{\iota + 1} \times ... \times U_{\upsilon}$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">This represents the set of ordered $(\upsilon -1)$-tuples $\overline{a_\iota} = (a_1,...,a_{\iota-1},a_{\iota+1},...,a_\upsilon)$ where $a'_\iota \in U'_\iota$ for all $\iota' \not = \iota$</p>
-                            <p class="fragment fade-in-then-semi-out">Let $A_\iota(\overline{a}_\iota) \subseteq U_\iota$ be a function for each $\overline{a_\iota} \in \overline{U_\iota}$</p>
-                            <p class="fragment fade-in-then-semi-out">Thus an abstract economy is defined as $[U_1,...,U_\upsilon,f_1,...,f_\upsilon,A_1(\overline{a_1}),...,A_\upsilon(\overline{a_\upsilon})]$</p>
-                        </div>
-                    </section>
-                    <section class="content" id="economy2">
-                        <p class="inter-title">A Lemma on Abstract Economies</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out">Since $A_\iota(\overline{a}_\iota) \subseteq U_\iota$ (where $A_\iota(a_\iota)$ is a continuous multi-valued function)</p>
-                            <p class="fragment fade-in-then-semi-out">Let an agent $\iota$ choose an action $a_\iota \in U_\iota$</p>
-                            <p class="fragment fade-in-then-semi-out">If $f_\iota(a)$ assigns an amount (payoff) received by agent $\iota$</p>
-                            <p class="fragment fade-in-then-semi-out">Thus an abstract economy can treated closely to a game! Extending Nash definition of an equilibrium for a game...</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">$a^*$ is an equilibrium point of $[U_1,...,U_\upsilon,f_1,...,f_\upsilon,A_1(\overline{a_1}),...,A_\upsilon(\overline{a_\upsilon})]$ if for all $\iota = 1,..,\upsilon$, $a^*_\iota \in A_\iota(\overline{a}_\iota)$ and $f_\iota(a^*, \overline{a^*}) = \argmax f_\iota(a, \overline{a^*})$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">An equilibrium is defined when each agent is maximizing their payoff over the set of their available actions given other agents' actions</p> 
-                        </div>
-                    </section>
-                    <section class="content" id="economy3">
-                        <p class="inter-title">A Lemma on Abstract Economies</p>
-                        <div class="align-left">
-                            <p class="fragment fade-in-then-semi-out">If</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For each $\iota$, $U_\iota$ (choice set) is compact and convex and $f_\iota(\overline{a_\iota}, a_\iota)$ (payoff function) is continuous on $U$ and quasi-concave in $a_\iota$</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">For every $a_\iota$, $A_\iota(\overline{a_\iota})$ (best response correspondence) is convex, nonempty and is a continuous function whose graph is a closed set</p>
-                            <p class="fragment fade-in-then-semi-out">Then</p>
-                            <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">The abstract economy $[U_1,...,U_\upsilon,f_1,...,f_\upsilon,A_1(\overline{a_1}),...,A_\upsilon(\overline{a_\upsilon})]$ has an equilibrium point</p>
-                            <p class="fragment fade-in-then-semi-out">This lemma generalizes Nash's theorem on the existence of equilibrium points for games</p>
-                        </div>
-                    </section>
-                </section>
-                <section class="content" id="proof1">
-                    <p class="inter-title">Proof</p>
+                <section class="content" id="repeated-games">
+                    <p class="inter-title">Repeated Games</p>
                     <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Consider $m + n + 1$ participants in an abstract economy $E$, where $m$ are consumers, $n$ are firms and an arbitrary, imaginary market participant </p> 
-                        <p class="fragment fade-in-then-semi-out">For any conusmer $i$, let $\overline{x_i} \in X_1 \times ... \times X_{i-1} \times X_{i+1} \times ... \times X_m \times Y_1 \times ... \times Y_n \times P$</p> 
-                        <p class="fragment fade-in-then-semi-out">Define $A_i(\overline{x_i}) = \{x_i | x_i \in X_i, p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then define the abstract economy $E = [X_1,...,X_m,Y_1,...,Y_n,P, u_1(x_1),...,u_m(x_m),p\cdot y_1,...,p\cdot y_n, p\cdot z, A_1(\overline{x_1}),...,A_m(\overline{x_m})]$</p> 
-                        <p class="fragment fade-in-then-semi-out">There are $m$ participants, each chooses $x_i \in X_i$ subject to restriction $x_i \in A_i(\overline{x_i})$ and gets $u_i(x_i)$ payoff</p> 
-                        <p class="fragment fade-in-then-semi-out">There are $n$ firms, each chooses $y_j$ from $Y_j$ and receives payoff $p \cdot y_j$</p> 
-                        <p class="fragment fade-in-then-semi-out">Imaginary participant chooses $p \in P$ and receives $p \cdot z$</p> 
+                        <p class="fragment fade-in-then-semi-out">Many games are played over different time periods</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">Ex. Repeated prisoner's dilemma if the two criminals anticipate future crimes</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">Ex. Gasoline pricing game</p>
+                        <p class="fragment fade-in-then-semi-out">Trigger strategies based on future expectation!</p>
+                        <p class="fragment fade-in-then-semi-out">Possibility of cooperation over more than one period?</p>
                     </div>
                 </section>
-                <section class="content" id="proof2">
-                    <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
+                <section class="content" id="finitely-repeated-games">
+                    <p class="inter-title">Finitely Repeated Games</p>
                     <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Note $A_i(\overline{x_i}) = \{x_i | x_i \in X_i, p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">$max$ function is chosen to avoid $A_i(\overline{x_i})$ from being an empty set</p> 
-                        <p class="fragment fade-in-then-semi-out" style = "margin-left: 1.5em;">For some $x'_i \in X_i$, $\zeta_i \geqq x'_i \implies p\cdot \zeta_i \geqq p \cdot x'_i$</p> 
-                        <p class="fragment fade-in-then-semi-out" style = "margin-left: 1.5em;">Then $p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)] \geqq p\cdot \zeta_i \geqq p\cdot x'_i$</p> 
-                        <p class="fragment fade-in-then-semi-out">At E-equilibrium, there is no difference as <br>$p^* \cdot y_j^* \geqq p^*\cdot 0 = 0 \implies max[0, \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)] = \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)$</p> 
-                        <p class="fragment fade-in-then-semi-out" style= "margin-left: 1.5em;">$A_i(\overline{x^*_i}) = \{x_i | x_i \in X_i, p^*\cdot x_i \leqq p^*\cdot \zeta_i + \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Condition 2 (C2) satisfied at E-equilibrium</p> 
+                        <p class="fragment fade-in-then-semi-out">Consider Prisoner's dilemma played over T periods</p>
+                        <p class="fragment fade-in-then-semi-out">Regardless of what happened in T-1, players will defect on each other in period T</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-align: center; font-style: oblique; margin-right: 10%; margin-left: 10%;"><b style="color: red">1973</b> Richard Selten: For any stage game with a unique Nash equilibrium,
+                            the unique subgame-perfect equilibrium of the finitely repeated game involves playing
+                            the Nash equilibrium every period</p>
+                        <p class="fragment fade-in-then-semi-out">...always an incentive to betray cooperation for the next period</p>
                     </div>
                 </section>
-                <section class="content" id="proof3">
-                    <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
+                <section class="content" id="infinitely-repeated-games">
+                    <p class="inter-title">Infinitely Repeated Games</p>
                     <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Condition 1 (C1) is satisfied from the definition of equilibrium point</p> 
-                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Firm $j$ chooses payoff maximizing $y^*_j \in Y_j$ at equilibrium in view of other firms' production plans</p> 
-                        <p class="fragment fade-in-then-semi-out">Condition 3 (C3) is also satisfied</p> 
-                        <p class="fragment fade-in-then-semi-out" style="margin-left: 1.5em;">Trivially $p^* \geqq 0$ at equilibrium (hopefully, all commodities aren't free)</p> 
+                        <p class="fragment fade-in-then-semi-out">Players don't know the long run horizon - future could end next period or may go on indefinitely</p> 
+                        <p class="fragment fade-in-then-semi-out">One difficulty:</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">If an infinite stream of low payoffs and an infiite stream of high payoffs sum to infinity, which one is better?</p>
+                        <p class="fragment fade-in-then-semi-out">Introducing $\delta$ - discount factor</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">How much a payoff unit is worth in one period in the future than today</p> 
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">Ex. Interest rates</p>
+                        <p class="fragment fade-in-then-semi-out">Players can use trigger strategies to sustain cooperation/deter deviation</p>
+                        <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">Do they work?</p>
                     </div>
                 </section>
-                <section class="content" id="proof4">
+                <section class="content" id="infinitely-repeated-games">
+                    <p class="inter-title">Infinitely Repeated Games</p>
+                    <div class="align-left">
+                        <p class="fragment fade-in-then-semi-out">Recall Geometric series: $a + ar + ar^2 + ar^3 + ... + = \frac{a}{1-r}$ (assuming $|r| < 1$)</p> 
+                        <p class="fragment fade-in-then-semi-out">Cooperation Payoff: $V^{eq} = 2 + 2\delta + 2\delta^2 + 2\delta^3 + ... = \frac{2}{1-\delta}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Deviation Payoff: $V^{dev} = 3 + 1\delta + 1\delta^2 + 1\delta^3 + ...= 3 + \delta(1 + \delta + ...) = 3 + \frac{1}{1- \delta}$</p> 
+                        <p class="fragment fade-in-then-semi-out">Solving for $\delta$, cooperation possible if $V^{eq} \geq V^{dev}$ or $\delta \geq \frac{1}{2}</p>
+                        <p class="fragment fade-in-then-semi-out">...if $\delta \geq \frac{1}{2} the players value the future highly enough to not deviate</p>
+                        <p class="fragment fade-in-then-semi-out">...if $\delta < \frac{1}{2}$ cooperation not possible, players will defect every period</p>
+                        <p class="fragment fade-in-then-semi-out">As $\delta \rightarrow 1$ the punishment becomes harsher - grim strategy</p> 
+                    </div>
+                </section>
+                <!-- <section class="content" id="proof4">
                     <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
                     <div class="align-left">
                         <p class="fragment fade-in-then-semi-out">From definition of $z$ (excess demand over supply), $p^* \cdot z^* = 0$ for market clearing</p> 

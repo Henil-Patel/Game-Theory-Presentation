@@ -42,9 +42,9 @@ window.extensiveForm = function(section) {
                 .attr("width", 800)
                 .attr("height", 400)
                 .style("position", "relative")
-                .style("border", "0.01em solid white")
+                // .style("border", "0.01em solid white")
                 .style("bottom", "90%")
-                .style("left", "0%");
+                .style("left", "10%");
 
     svg3.attr("class", "p1")
         .attr("class", "p1movie")
@@ -53,10 +53,24 @@ window.extensiveForm = function(section) {
         .attr("class", "p2moviemovie")
         .attr("class", "p2movieconcert")
         .attr("class", "p2concertmovie")
-        .attr("class", "p2concertconcert");
+        .attr("class", "p2concertconcert")
+        .attr("class", "payoffs");
 
+        var payOffPosition = [
+            {x : 465, y: 50},
+            {x: 465, y: 150},
+            {x: 465, y: 250},
+            {x: 465, y: 350}
+        ]
 
-    const actionStates = ["showFirstPlayerStrategies", "showSecondPlayerStrategies", "showPayoffs"];
+        var payOffs = [
+            {p1: "1", p2: "2"},
+            {p1: "0", p2: "0"},
+            {p1: "0", p2: "0"},
+            {p1: "2", p2: "1"}
+        ]
+
+    const actionStates = ["showFirstPlayerStrategies", "showSecondPlayerStrategies", "showPayoffs", "highlightEquilibria"];
     let currentState = 0;
     function handleKeyPress(event) {
         if (event.key === "Enter") {
@@ -294,7 +308,44 @@ window.extensiveForm = function(section) {
                         .attr('x2', concertconcert2Data[1].x)
                         .attr('y2', concertconcert2Data[1].y);
             }
-            if ()
+            if (action == "showPayoffs"){
+
+                svg3.selectAll('.payoffs')
+                        .data(payOffs)
+                        .enter()
+                        .append('text')
+                        .text(d => d.p1 + " , " + d.p2)
+                        .attr('x', (d, i) => payOffPosition[i].x)
+                        .attr('y', (d, i) => payOffPosition[i].y)
+                        .attr('fill', 'white')
+                        .style('font-size', '20px')
+                        .style('font-style', 'italic')
+                        .style('font-family', 'Italianno')
+                        .style('opacity', 0) // Start text with opacity 0
+                        .transition()
+                        .delay(200) // Delay each text element
+                        .duration(1000) // Transition duration
+                        .style('opacity', 1);
+            }
+            if (action == "highlightEquilibria") {
+                svg3.selectAll('.payoffs')
+                        .data(payOffs)
+                        .enter()
+                        .append('text')
+                        .text(d => d.p1 + " , " + d.p2)
+                        .attr('x', (d, i) => payOffPosition[i].x)
+                        .attr('y', (d, i) => payOffPosition[i].y)
+                        .attr('fill', d => d.p1 == 1 && d.p2 == 2 ? 'yellow':'white' && d.p1 == 2 && d.p2 == 1 ? 'green':'white')
+                        .style('font-size', '20px')
+                        .style('font-style', 'italic')
+                        .style('font-family', 'Italianno')
+                        .style('opacity', 0) // Start text with opacity 0
+                        .transition()
+                        .delay(200) // Delay each text element
+                        .duration(1000) // Transition duration
+                        .style('opacity', 1);
+                
+            }
             currentState = (currentState + 1) % actionStates.length;
         }
     }
