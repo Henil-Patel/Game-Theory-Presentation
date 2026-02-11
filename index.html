@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>ECG 765 Final</title>
+		<title>Applied Game Theory</title>
         <script src="d3.v7.js"></script>
 		<link rel="stylesheet" href="reveal.js/dist/reset.css">
 		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
@@ -110,7 +110,6 @@
 		<div class="reveal">
 			<div class="slides">
 				<section class="opening" id="title">
-                    <h3 class="classname">NPOE Talks Series</h3>
                     <p class="title">Game Theory for the Impatient</p>
                     <p class="author-name">Henil Patel</p1>
                 </section>
@@ -145,7 +144,6 @@
                         <p class="fragment fade-in-then-semi-out">$f: \R_1 \times ... \times \R_n \rightarrow \R$ means $f$ is a multi-variable function which maps a <b style = "color: tomato">Cartesian product of Real Numbers (domain)</b> to a <b style ="color: tomato">Real Number (image)</b></p>
                         <p class="fragment fade-in-then-semi-out">$Pr: T \rightarrow [0,1]$ means a function which assigns probability to an event $t \in T$</p>
                         <p class="fragment fade-in-then-semi-out">$Pr(E | H)$ means the probability of event $E$ "given" event $H$</p>
-                        <!-- <p class="fragment fade-in-then-semi-out"></p> -->
                     </div>
                 </section>
                 <section class ="content" id="model0">
@@ -154,26 +152,7 @@
                         <p class="fragment fade-in-then-semi-out">$P$ - set of players $i = 1...n$</p>
                         <p class="fragment fade-in-then-semi-out">$S_i$ - set of strategies $s_i$ open to player $i$</p>
                         <p class="fragment fade-in-then-semi-out">$u: S_i \times S_{i'} \rightarrow \R$ - payoff function for player $i$ choosing strategy $s_i$ given strategies chosen by $i'$ players</p>
-                        <!-- <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p> -->
                     </div>
-                </section>
-                <section class="content" id="prisoners-dilemma">
-                    <p class="inter-title">Prisoner's Dilemma</p>
-                    <p class="fig-title">Payoff Matrix</p>
-                    <div class ="align-left">
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Two criminals are caught committing a crime...</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Their strategies are $S = \{silent, defect\}$ and both are aware of each other's strategies.</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Payoffs are defined in years of freedom from prison sentence (3 means 3 years of freedom earned)</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Regardless of what player <b style="color: tomato">2</b> does, player <b style="color: cyan;">1</b> is better off defecting! (By symmetry, player <b style="color: tomato;">2</b> will do the same)</p>
-                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Takeaway? Rational players acting in self-interest can lead to socially inefficient outcomes! &#129327;</p>
-
-                    </div>
-                    <script src="animations/prisonersDilemma.js"></script>
                 </section>
                 <section class="content" id="best-response">
                     <p class="inter-title">Best Response</p>
@@ -197,6 +176,17 @@
                         <p class="fragment fade-in-then-semi-out">Widely used result in economics, politics, philosophy, evolutionary biology and computer science</p>
                     </div>
                 </section>
+                <section class="content" id="prisoners-dilemma">
+                    <p class="inter-title">Prisoner's Dilemma</p>
+                    <p class="fig-title">Payoff Matrix</p>
+                    <div class ="align-left">
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Two criminals are caught committing a crime...</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Their strategies are $S = \{silent, defect\}$ and both are aware of each other's strategies.</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Payoffs are defined in years of freedom from prison sentence (3 means 3 years of freedom earned)</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Regardless of what player <b style="color: tomato">2</b> does, player <b style="color: cyan;">1</b> is better off defecting! (By symmetry, player <b style="color: tomato;">2</b> will do the same)</p>
+                        <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Takeaway? Rational players acting in self-interest can lead to socially inefficient outcomes! &#129327;</p>
+                    </div>
+                </section>
                  <section class="content" id="coordination-game">
                     <p class="inter-title">Coordination Game</p>
                     <p class="fig-title">Payoff Matrix</p>
@@ -208,7 +198,6 @@
                         <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Two NE in the coordination game</p>
                         <p class="fragment fade-in-then-semi-out" style="margin-right: 50%;">Ex. rock, paper, scissor does not have a pure strategy Nash Equilibrium</p>
                     </div>
-                    <script src="animations/coordinationGame.js"></script>
                 </section>
                 <section class="content" id="mixed-strategy">
                     <p class="inter-title">Mixed Strategies</p>
@@ -219,7 +208,6 @@
                         <p class="fragment fade-in-then-semi-out">For example</p>
                         <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">In case of prisoner's dilemma, a strategy could be $s_i = \{1/3, 2/3\}$</p>
                         <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">where $1/3$ is the probabiliy that player defects, $2/3$ is probability that the player remains silent</p>
-                        <!-- <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;"></p> -->
                     </div>
                 </section>
                 <section class="content" id="mixed-strategy-equilibrium">
@@ -233,9 +221,6 @@
                         <p class="fragment fade-in-then-semi-out">Compute the expected payoff:</p>
                         <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">$U_1((x,1-x), (y, 1-y)) = \sum\limits_{i=1,2} \sigma_i (\sum\limits_{j=1,2} \sigma_j \cdot U_1(a_i, a_j)) = 1 - x - y + 3xy$</p>
                         <p class="fragment fade-in-then-semi-out" style="text-indent: 1.5em;">$U_2((y,1-y), (x, 1-x)) = \sum\limits_{j=1,2} \sigma_j (\sum\limits_{i=1,2} \sigma_i \cdot U_2(a_i, a_j)) = 2 - 2x - 2y + 3xy$</p>
-                        <!-- <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p>
-                        <p class="fragment fade-in-then-semi-out"></p> -->
                     </div>
                 </section>
                 <section class = "content" id="mixed-strategy-equilibrium-2">
@@ -344,157 +329,13 @@
                         <p class="fragment fade-in-then-semi-out">Recall Geometric series: $a + ar + ar^2 + ar^3 + ... + = \frac{a}{1-r}$ (assuming $|r| < 1$)</p> 
                         <p class="fragment fade-in-then-semi-out">Cooperation Payoff: $V^{eq} = 2 + 2\delta + 2\delta^2 + 2\delta^3 + ... = \frac{2}{1-\delta}$</p> 
                         <p class="fragment fade-in-then-semi-out">Deviation Payoff: $V^{dev} = 3 + 1\delta + 1\delta^2 + 1\delta^3 + ...= 3 + \delta(1 + \delta + ...) = 3 + \frac{1}{1- \delta}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Solving for $\delta$, cooperation possible if $V^{eq} \geq V^{dev}$ or $\delta \geq \frac{1}{2}</p>
-                        <p class="fragment fade-in-then-semi-out">...if $\delta \geq \frac{1}{2} the players value the future highly enough to not deviate</p>
+                        <p class="fragment fade-in-then-semi-out">Solving for $\delta$, cooperation possible if $V^{eq} \geq V^{dev}$ or $\delta \geq \frac{1}{2}$</p>
+                        <p class="fragment fade-in-then-semi-out">...if $\delta \geq \frac{1}{2}$ the players value the future highly enough to not deviate</p>
                         <p class="fragment fade-in-then-semi-out">...if $\delta < \frac{1}{2}$ cooperation not possible, players will defect every period</p>
                         <p class="fragment fade-in-then-semi-out">As $\delta \rightarrow 1$ the punishment becomes harsher - grim strategy</p> 
                     </div>
                 </section>
-                <!-- <section class="content" id="proof4">
-                    <p class="inter-title">Competitive Equilibrium at E-Equilibrium</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">From definition of $z$ (excess demand over supply), $p^* \cdot z^* = 0$ for market clearing</p> 
-                        <p class="fragment fade-in-then-semi-out">Let $\delta^h \in P$ where $\delta^h = (0,...,1,...,0)$ for some index $h$ (only one commodity has a non-negative price)</p> 
-                        <p class="fragment fade-in-then-semi-out">Then $0 = p^* \cdot z^* \geqq \delta^h \cdot z^* = z^*_h$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then $z^* \leqq 0$</p> 
-                        <p class="fragment fade-in-then-semi-out">Thus Condition 4 (C4) along with C1 - C3 have been satisfied!</p> 
-                        <p class="fragment fade-in-then-semi-out">Done?</p> 
-                        <p class="fragment fade-in-then-semi-out">No. Sorry.</p> 
-                    </div>
-                </section>
-                <section class="content" id="proof5">
-                    <p class="inter-title">Action Space Definition</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Define $\hat{X_i}$, $\hat{Y_j}$</p> 
-                        <p class="fragment fade-in-then-semi-out">$\hat{X_i} = \{x_i | x_i \in X_i,$ there exists $x_{i'} \in X_{i'}$ for each $i' \neq i$, $y_j \in Y_j$ for each $j$ such that $z\leqq 0\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">$\hat{Y_j} = \{y_j | y_j \in Y_j,$ there exists $x_i \in X_i$ for each $i$, $y_{j'} \in Y_{j'}$ for each $j' \neq j$ such that $z\leqq 0\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">These are consumption and production sets available to firm $i$ and $j$ as though they had complete control of the economy</p> 
-                        <p class="fragment fade-in-then-semi-out">Note $x^*_i \in \hat{X_i}$ and $y^*_j \in \hat{Y_j}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Need to show action spaces $\hat{X_i}$, $\hat{Y_j}$ are compact</p> 
-                    </div>
-                </section>
-                <section class="content" id="proof6">
-                    <p class="inter-title">Compactness of $\hat{Y_j}$</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">For the sake of contradiction suppose $\hat{Y_1}$ is unbounded. Let $y^k_j \in Y_j$ and $x^k_i \in X_i$ be sequences</p> 
-                        <p class="fragment fade-in-then-semi-out">Let $\lim_{k \to \infty} |y^k_1| = \infty$ and $\sum_{j=1}^n y_j^k \geqq \sum_{i=1}^m x_i^k - \zeta$ <i style="color: tomato;">(1)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Since $\xi = \sum_{i=1}^m \xi_i$ and $x_i \geqq \xi_i$ for all $i$, it follows $\sum_{j=1}^n y_j^k \geqq \xi - \zeta$ <i style="color: tomato;">(2)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Let $\mu^k = max_j |y_j^k|$ such that $\mu^k \geqq 1$ for a large $k$. <br>Then by convexity of $Y_j: (1/\mu^k)y^k_j + (1-1/\mu^k)0 \implies y^k_j / \mu^k \in Y_j$<i style="color: tomato;">(3)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Then from <i style="color: tomato;">(2)</i> $\sum_{j=1}^n(y_j^k/\mu^k) \geqq (\xi - \zeta)/\mu^k$<i style="color: tomato;">(4)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Then $\lim_{k \to \infty} \mu^k = \infty$ from <i style="color: tomato;">(1)</i> and thus $|y_j^k / \mu^k| \leqq 1$<i style="color: tomato;">(5)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">By Bolzano-Weierstrass choose a subsequence $\{k_q\}$ such that for all $j$, $\lim_{q \to \infty} y^{k_q}_j/\mu^{k_q} = y_j^o$<i style="color: tomato;">(6)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">From <i style="color: tomato;">(4)</i> and <i style="color: tomato;">(6)</i> $\sum_{j=1}^n y_j^o \geqq 0$ and since $Y_j$ is closed, $y_j^o \in Y_j$<i style="color: tomato;">(7)</i></p> 
-                    </div>
-                </section>
-                <section class="content" id="proof7">
-                    <p class="inter-title">Compactness of $\hat{Y_j}$</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Since $\sum_{j=1}^n y_j^o \geqq 0$ and $y_j^o \in Y_j$ (by closure) then $\sum_{j=1}^n y_j^o \in Y$ (total production set)<i style="color: tomato;">(8)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">However since $\sum_{j=1}^n y_j^o \geqq 0$, then $\sum_{j=1}^n y_j^o = 0$ by A1 (at least one negative component needed)<i style="color: tomato;">(9)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Rearranging <i style="color: tomato;">(9)</i> $\sum_{j\neq j'}y_j^o = -y^o_{j'}$<i style="color: tomato;">(10)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Since $0 \in Y$ then $y_{j'}^o \in Y$ and thus $-y_{j'}^o \in -Y$ (additive inverse set)<i style="color: tomato;">(11)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">But from <i style="color: tomato;">(10)</i> $\sum_{j\neq {j'}}y_j^o = -y_{j'}^o \in Y$. So $-y_{j'}^o \in -Y$ and $-y_{j'}^o \in Y$ thus $y_{j'}^o = 0$ by A1<i style="color: tomato;">(12)</i></p> 
-                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Since $\lim_{q \to \infty} y^{k_q}_j/\mu^{k_q} = y_j^o = 0$, the equality $|y_j^{k_q}| = \mu^{k_q}$  is only true for a finite number of $q$ <i style="color: tomato;">(13)</i></p> 
-                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Considering the definition of $\mu^{k_q} = max_j|y^{k_q}|$, there exists a max L-2 norm for at least one $j$ for every $q$. Contradiction!<i style="color: tomato;">(14)</i></p> 
-                        <p class="fragment fade-in-then-semi-out" style="color: yellow">Hence WLOG $\hat{Y_1}$ is bounded so is $\hat{Y_j}$ for all $j$. Since $\hat{Y_j}$ closed and bounded, it is compact.</p>
-                    </div>
-                </section>
-                <section class="content" id="proof8">
-                    <p class="inter-title">Compactness of $\hat{X_i}$</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Let $x_i \in \hat{X_i}$ then $\xi_i \leqq x_i \leqq \sum_{j=1}^{n} y_j - \sum_{i' \neq i} x_{i'} + \zeta$ <i style="color: tomato;">(1)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Since $y_j \in \hat{Y_j}$ for all $j$ and $\xi_{i'} \leqq x_{i'}$ for all $i'$ then $\xi_i \leqq x_i \leqq \sum_{j=1}^{n} y_j - \sum_{i' \neq i} xi_{i'} + \zeta$ <i style="color: tomato;">(2)</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Since $\hat{Y_j}$ is bounded, the term $\sum_{j=1}^{n} y_j - \sum_{i' \neq i} xi_{i'} + \zeta$ is bounded <i style="color: tomato;">(3)</i></p>
-                        <p class="fragment fade-in-then-semi-out">Hence from <i style="color: tomato;">(3)</i>, $\hat{X_i}$ is bounded for all $i$. It has been proven $\hat{X_i}$ and $\hat{Y_j}$ are compact.</p> 
-                    </div>
-                </section>
-                <section class="content" id="proof9">
-                    <p class="inter-title">Abstract Economy - So Far</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Let there be a positive real $c$ such that a cube is defined as $C = \{x | |x_h| \leqq c$  $\forall h\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">$\hat{X_i} \subseteq int C$ for all $i$ and $\hat{Y_j} \subseteq int C$ for all $j$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then let $\tilde{X_i} = X_i \cap C$ and $\tilde{Y_j} = Y_j \cap C$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then $\tilde{X_i}$ and $\tilde{Y_j}$ are compact and convex (since $C$ is compact & convex, and $X_i, Y_j$ is closed & convex)</p> 
-                        <p class="fragment fade-in-then-semi-out">$P$ is also compact & convex</p> 
-                        <p class="fragment fade-in-then-semi-out">Consumer payoff $u_i(x_i)$ is continuous, quasi-concave by A3 and Producer payoff & Market participant payoff $p\cdot y_j$, $p \cdot z$ is also continuous</p>
-                        <p class="fragment fade-in-then-semi-out">Recall $\tilde{E} = $<i style="color: tomato;">$[\tilde{X_1},..,\tilde{X_m},\tilde{Y_1},..,\tilde{Y_n},P, u_1(x_1),..,u_m(x_m),p\cdot y_1,..,p\cdot y_n, p\cdot z,$</i>$\tilde{A_1}(\overline{x_1}),..,\tilde{A_m}(\overline{x_m})]$</p>
-                    </div>
-                </section>
-                <section class="content" id="proof10">
-                    <p class="inter-title">Best Response Correspondence</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is <i style = "color: green;">non-empty</i>, convex, continuous, and its graph is closed</p> 
-                        <p class="fragment fade-in-then-semi-out">Recall $A_i(\overline{x_i})$ is defined by $\{x_i | x_i \in X_i, p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]\}$</p> 
-                        <p class="fragment fade-in-then-semi-out">For each $i$, $x'_i \in X_i \implies x'_i \leqq \zeta_i$ and let $y'_j =0$ then $\sum_{i=1}^{m}x'_i - \sum_{j=1}^n y'_j(=0) - \zeta \leqq 0$</p> 
-                        <p class="fragment fade-in-then-semi-out">Thus $x'_i \in \hat{X_i} \subseteq C$</p> 
-                        <p class="fragment fade-in-then-semi-out">Define $\tilde{A_i}(\overline{x_i}) = C \cap A_i(\overline{x_i})$</p> 
-                        <p class="fragment fade-in-then-semi-out">Since $x'_i \in C$ then $x'_i \in \tilde{A_i}(\overline{x_i})$ thus $\tilde{A_i}(\overline{x_i})$ is <i style = "color: green;">non-empty</i></p>
-                    </div>
-                </section>
-                <section class="content" id="proof11">
-                    <p class="inter-title">Best Response Correspondence</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is non-empty, <i style = "color: green;">convex</i>, continuous, and its graph is closed</p> 
-                        <p class="fragment fade-in-then-semi-out">$\tilde{A_i}(\overline{x_i})$ is characterized by the inequality $p\cdot x_i \leqq p\cdot \zeta_i + max[0, \sum_{j=1}^{n}\alpha_{ij}(p\cdot y_j)]$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then for some $0 \leqq t \leqq 1$, and $x'_i \in \tilde{A_i}(\overline{x_i})$ it follows that all points $(t x_i + (1-t)x'_i) \in \tilde{A_i}(\overline{x_i})$</p> 
-                        <p class="fragment fade-in-then-semi-out">Hence $\tilde{A_i}(\overline{x_i})$ is <i style="color: green;">convex</i></p> 
-                    </div>
-                </section>
-                <section class="content" id="proof12">
-                    <p class="inter-title">Best Response Correspondence</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is non-empty, convex, continuous, and its <i style = "color: green;">graph is closed</i></p> 
-                        <p class="fragment fade-in-then-semi-out">Define sequences $\{\overline{x_i^k}\} \rightarrow \overline{x_i}$ and $\{x_i^k\} \rightarrow x_i$. Then for each $k$, $x_i^k \in \tilde{A_i}(\overline{x^k_i})$ by definition of $\tilde{A_i}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Since $x_i \in \tilde{A_i}(\overline{x_i})$, the graph contains the limit point and is <i style = "color: green;">closed</i></p> 
-                    </div>
-                </section>
-                <section class="content" id="proof13">
-                    <p class="inter-title">Best Response Correspondence</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Want to show $\tilde{A_i}(\overline{x_i})$ is non-empty, convex, <i style = "color:green;">continuous</i>, and its graph is closed</p> 
-                        <p class="fragment fade-in-then-semi-out">Show if $p\cdot \zeta_i > min_{x_i} p\cdot x_i$ then $\tilde{A_i}(\overline{x_i})$ is continuous at $\overline{x_i}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Omitted for brevity</p>
-                    </div>
-                </section>
-                <section class="content" id="proof14">
-                    <p class="inter-title">Validation of $z^*$ For Competitive Economy</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">It has been shown that the equilibrium point $(x^*_1,...,x^*_m,y^*_1,...,y^*_n,p^*)$ exists for $\tilde{E}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Show that this point is the equilibrium for $E$ (competitive equilibrium)</p> 
-                        <p class="fragment fade-in-then-semi-out">At $y^*$ we know $max[0, \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)] = \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then from $\tilde{A_i}(\overline{x_i})$, it follows $p^* \cdot x_i^* \leqq p^* \cdot \zeta_i+ \sum_{j=1}^{n}\alpha_{ij}(p^*\cdot y^*_j)$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then $p^*\cdot x^* \leqq p^* \cdot \zeta + p^*\cdot y^* \implies p^*\cdot z^* \leqq 0$</p> 
-                        <p class="fragment fade-in-then-semi-out">Using a $\delta_h \leqq p^*$, it can be established that $z^* \leqq 0$ <i style = "color: tomato;">(Condition 4)</i></p> 
-                    </div>
-                </section>
-                <section class="content" id="proof15">
-                    <p class="inter-title">Validation $x^*$ For Competitve Economy</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">It is known $x^*_i \in \hat{X_i} \subseteq int C$</p> 
-                        <p class="fragment fade-in-then-semi-out">Let $x'_i \in A_i(\overline{x^*_i})$ then $u_i(x'_i) > u_i(x^*_i)$ and $u_i[tx'_i + (1-t)x^*_i] > u_i(x^*_i)$ for $0 < t < 1$</p> 
-                        <p class="fragment fade-in-then-semi-out">Since $C$ is compact, convex, $tx'_i + (1-t)x^*_i \in C$</p> 
-                        <p class="fragment fade-in-then-semi-out">Then by convexity $tx'_i + (1-t)x^*_i \in A_i(\overline{x^*_i})$ and $tx'_i + (1-t)x^*_i \in \tilde{A_i}(\overline{x^*_i})$</p> 
-                        <p class="fragment fade-in-then-semi-out">This contradicts $x^*$ as an equilibrium for $\tilde{E}$</p> 
-                        <p class="fragment fade-in-then-semi-out">Thus $x^*_i$ maximizes $u_i(x_i)$ for $x_i \in A_i(\overline{x_i})$ <i style = "color: tomato;">(Condition 2)</i></p>
-                    </div>
-                </section>
-                <section class="content" id="proof16">
-                    <p class="inter-title">Validate $y^*$ For Competitive Economy</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">A similar argument shows that if $y'_j \in Y_j$ such that $p^*y'_j > p^*\cdot y^*_j$, then $p^*\cdot [ty'_j + (1-t)y^*_j] > p^*\cdot y^*_j$</p>
-                        <p class="fragment fade-in-then-semi-out">Thus $y'_j \in C$ as $C$ is compact, convex and $y'_j \in \tilde{Y_j}$</p>
-                        <p class="fragment fade-in-then-semi-out">This contradicts $y^*$ as an equilibrium for $\tilde{E}$</p>
-                        <p class="fragment fade-in-then-semi-out">Thus $y^*_i$ maximizes $p^*\cdot y_j$ for $y_j \in Y_j$ <i style="color: tomato;">(Condition 1)</i></p>
-                    </div>
-                </section>
-                <section class="content" id="proof17">
-                    <p class="inter-title">Validate $p^*$ For Competitive Economy</p>
-                    <div class="align-left">
-                        <p class="fragment fade-in-then-semi-out">Finally $p^*$ maximizes $p\cdot z^*$ for $p \in P$ is true for both $E$ and $\tilde{E}$ <i style="color: tomato;">(Condition 3)</i></p>
-                        <p class="fragment fade-in-then-semi-out">All conditions (C1-C4) for competitive equilibrium have been satisfied for $E$ under the assumptions (A1-A4), thus it is a competitive equilibrium at $(x^*_1,...,x^*_m,y^*_1,...,y^*_n,p^*)$</p>
-                        <p class="fragment fade-in-then-semi-out">Fin</p>
-                    </div>
-                </section> -->
+ 
                 <section class="content" id="final">
                     <p class="inter-title">Thank you</p>
                     <p style="font-size: 0.7em;">This presentation was done using JavaScript, D3.js (for visualizations) and Reveal.js (for slides)</p>
@@ -518,27 +359,50 @@
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
 
 			});
+        </script>
+        <script type="module">
+            // Reveal.on('slidechanged', function(event) {
+            //     var currentSlide = event.currentSlide;
+            //     if (currentSlide.id === "prisoners-dilemma"){
+            //         prisonersDilemma(currentSlide);
+            //     }
+            //     else if (currentSlide.id === "coordination-game") {
+            //         coordinationGame(currentSlide);
+            //     }
+            //     else if (currentSlide.id === "mixed-strategy-equilibrium-3") {
+            //         mixedStratEq(currentSlide);
+            //     }
+            //     else if (currentSlide.id === "sequential-games-2") {
+            //         sequentialGames(currentSlide);
+            //     }
+            //     else if (currentSlide.id === "extensive-form") {
+            //         extensiveForm(currentSlide);
+            //     }
+            // });
+            import { PrisonersDilemma } from "./animations/prisonersDilemma.js";
+            import { CoordinationGame } from "./animations/coordinationGame.js"
+            
+            let currentAnimation = null;
+            Reveal.on("slidechanged", event => {
+                if (currentAnimation) {
+                    currentAnimation.reset();
+                    currentAnimation = null;
+                }
 
-            Reveal.on('slidechanged', function(event) {
-                var currentSlide = event.currentSlide;
-                if (currentSlide.id === "prisoners-dilemma"){
-                    prisonersDilemma(currentSlide);
+                if (event.currentSlide.id === "prisoners-dilemma"){
+                    currentAnimation = new PrisonersDilemma(event.currentSlide);
                 }
-                else if (currentSlide.id === "coordination-game") {
-                    coordinationGame(currentSlide);
-                }
-                else if (currentSlide.id === "mixed-strategy-equilibrium-3") {
-                    mixedStratEq(currentSlide);
-                }
-                else if (currentSlide.id === "sequential-games-2") {
-                    sequentialGames(currentSlide);
-                }
-                else if (currentSlide.id === "extensive-form") {
-                    extensiveForm(currentSlide);
+
+                if (event.currentSlide.id === "coordination-game") {
+                    currentAnimation = new CoordinationGame(event.currentSlide);
                 }
             });
 
-
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" && currentAnimation) {
+                    currentAnimation.next();
+                }
+            });
 
 		</script>
 

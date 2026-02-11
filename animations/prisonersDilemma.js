@@ -1,322 +1,147 @@
-var width = 400;
-var height = 400;
-var bottom = "90%";
-var left = "30%";
-var setRadius = 150;
-var pointRadius = 5;
-var offset = 70;
-window.prisonersDilemma = function(section) {
-    var existingSVG = section.querySelector("svg");
-    if (existingSVG) {
-        existingSVG.remove();
-    }
-    var xaxisData = [
-        { x: 200, y: 50},
-        { x: 200, y: 350}
-    ];
-    var yaxisData = [
-        { x: 50, y: 200},
-        { x: 350, y: 200}
-    ]
 
-    var centerX = 185;
-    var centerY = 200;
-    var payOffPosition = [
-        { x : centerX + offset + 10, y: centerY + offset},       // defect , defect
-        { x : centerX - offset -10, y: centerY + offset},       // defect, silent
-        { x : centerX + offset + 10, y: centerY - offset},       // silent, defect
-        { x : centerX - offset - 10, y: centerY - offset}        // silent, silent
-    ]
+import {TwoByTwoGameLeftPane} from './twoPlayerGame.js'
+import { GeometryEngine } from './twoPlayerGeometryEngine.js';
 
-    // var payOffs = ["1  ,  1", "3  ,  0", "0  ,  3", "2  ,  2"];
-
-    var payOffs = [
-        {p1: "1", p2: "1"},
-        {p1: "3", p2: "0"},
-        {p1: "0", p2: "3"},
-        {p1: "2", p2: "2"}
-    ]
-
-    const strategy = ['silent', 'defect'];
-    const p1 = ['1'];
-    const p2 = ['2'];
-
-    var lineData1 = [
-        {x: 100, y: 100},
-        {x: 100, y: 285},
-        {x: 120, y: 285},
-        {x: 120, y: 100},
-        {x: 100, y: 100}
-    ];
-
-    var lineData2 = lineData1.map(d => ({x: d.x + 160, y: d.y}));
-    var lineData3 = lineData1.map(d => ({x: d.y + 25, y: d.x + 12}));
-    var lineData4 = lineData3.map(d => ({x: d.x, y: d.y + 140}))
-    console.log(lineData1);
-    console.log(lineData2)
-
-    var lineGenerator = d3.line()
-                            .x(d => d.x)
-                            .y(d => d.y)
-                            .curve(d3.curveLinear);
-
-    var svg = d3.select(section)
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height)
-                .style("position", "relative")
-                // .style("border", "0.01em solid white")
-                .style("bottom", bottom)
-                .style("left", left);
-
-    xaxis = svg.append('line')
-                .attr('x1', xaxisData[0].x)
-                .attr('y1', xaxisData[0].y)
-                .attr('x2', xaxisData[0].x)
-                .attr('y2', xaxisData[0].y)
-                .attr('stroke', 'white')
-                .attr('stroke-width', 2);
-
-    xaxis.transition()
-            .delay(1000) // Delay before transition starts
-            .duration(2500) // Transition duration
-            .attr('x2', xaxisData[1].x)
-            .attr('y2', xaxisData[1].y);
-
-    yaxis = svg.append('line')
-                .attr('x1', yaxisData[0].x)
-                .attr('y1', yaxisData[0].y)
-                .attr('x2', yaxisData[0].x)
-                .attr('y2', yaxisData[0].y)
-                .attr('stroke', 'white')
-                .attr('stroke-width', 2);
-
-    yaxis.transition()
-                .delay(1000) // Delay before transition starts
-                .duration(2500) // Transition duration
-                .attr('x2', yaxisData[1].x)
-                .attr('y2', yaxisData[1].y);
+export class PrisonersDilemma extends TwoByTwoGameLeftPane {
     
-     // Append text elements to SVG
-    svg.attr('class', 'strategy')
-        .attr('class', 'p1')
-        .attr('class', 'p2')
-        .attr('class', 'uss')
-        .attr('class', 'uds')
-        .attr('class', 'usd')
-        .attr('class', 'udd')
-        .attr('class', 'dom1')
-        .attr('class', 'dom2')
-        .attr('class', 'dom3')
-        .attr('class', 'dom4');
+    drawBase() {
 
+        this.geometry = new GeometryEngine(this.width, this.height, this.margin);
 
-    // Transition text to appear with opacity 1
-    svg.selectAll('.strategy')
-        .data(strategy)
-        .enter().append('text')
-        .attr('x', (d, i) => i * 150 + 100)
-        .attr('y', 35)
-        .text(d => d)
-        .attr('fill', 'white')
-        .style('font-size', '20px')
-        .style('font-style', 'italic')
-        .style('font-family', 'Italianno')
-        .style('opacity', 0) // Start text with opacity 0
-        .transition()
-        .delay((d, i) => i * 200) // Delay each text element
-        .duration(1000) // Transition duration
-        .style('opacity', 1);
-    
+        // Draw Axes
+        this.xAxis = this.geometry.xAxis();
+        this.yAxis = this.geometry.yAxis();
 
-    svg.selectAll('.strategy')
-        .data(strategy)
-        .enter().append('text')
-        .attr('x', 0)
-        .attr('y', (d, i) => i * 145 + 130)
-        .text(d => d)
-        .attr('fill', 'white')
-        .style('font-size', '20px')
-        .style('font-style', 'italic')
-        .style('font-family', 'Italianno')
-        .style('opacity', 0) // Start text with opacity 0
-        .transition()
-        .delay((d, i) => i * 200) // Delay each text element
-        .duration(1000) // Transition duration
-        .style('opacity', 1);
+        // Render Strategies 
+        this.strategies = [
+            { pos: this.geometry.leftStrategy(0), text: "Silent" },
+            { pos: this.geometry.leftStrategy(1), text: "Defect" },
+            { pos: this.geometry.topStrategy(0), text: "Silent" },
+            { pos: this.geometry.topStrategy(1), text: "Defect" }
+        ]
 
-    svg.selectAll('.p2')
-        .data(p2)
-        .enter()
-        .append('text')
-        .text(d=>d)
-        .attr('x', 190)
-        .attr('y', 20)
-        .attr('fill', 'white')
-        .style('font-size', '20px')
-        .style('font-style', 'italic')
-        .style('font-family', 'Italianno')
-        .style('opacity', 0) // Start text with opacity 0
-        .transition()
-        .delay(200) // Delay each text element
-        .duration(1000) // Transition duration
-        .style('opacity', 1);
+        this.strategyText = this.svg.selectAll(".strategy")
+            .data(this.strategies)
+            .enter()
+            .append("text")
+            .attr("x", d => d.pos.x)
+            .attr("y", d => d.pos.y)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("fill", "white")
+            .style("font-size", 20)
+            .style("font-style", "italic")
+            .style("font-family", "Italianno")
+            .style("opacity", 0)
+            .text(d => d.text);
 
-    svg.selectAll('.p1')
-        .data(p1)
-        .enter()
-        .append('text')
-        .text(d => d)
-        .attr('x', 10)
-        .attr('y', 205)
-        .attr('fill', 'white')
-        .style('font-size', '20px')
-        .style('font-style', 'italic')
-        .style('font-family', 'Italianno')
-        .style('opacity', 0) // Start text with opacity 0
-        .transition()
-        .delay(200) // Delay each text element
-        .duration(1000) // Transition duration
-        .style('opacity', 1);
+        
+        // Draw Labels 
+        this.players = [
+            { pos: this.geometry.leftPlayer(), text: "1", color: "cyan"},
+            { pos: this.geometry.topPlayer(), text: "2", color: "tomato"}
+        ];
 
-    const actionStates = ["highlightPlayers", "setupPayoff", "compare1", "compare2", "compare3", "compare4", "showNashEquilibrium"];
-    let currentState = 0;
-    function handleKeyPress(event) {
-            if (event.key === 'Enter' ) {
-                const action = actionStates[currentState];
-                if (action == "highlightPlayers"){
-                    // Add your custom actions here
-                    svg.selectAll('.p2')
-                        .data(p2)
-                        .enter()
-                        .append('text')
-                        .text(d=>d)
-                        .attr('x', 190)
-                        .attr('y', 20)
-                        .attr('fill', "tomato")
-                        .style('font-size', '20px')
-                        .style('font-style', 'italic')
-                        .style('font-family', 'Italianno')
-                        .style('opacity', 0) // Start text with opacity 0
-                        .transition()
-                        .delay(200) // Delay each text element
-                        .duration(1000) // Transition duration
-                        .style('opacity', 1);
-                    svg.selectAll('.p1')
-                        .data(p1)
-                        .enter()
-                        .append('text')
-                        .text(d => d)
-                        .attr('x', 10)
-                        .attr('y', 205)
-                        .attr('fill', 'cyan')
-                        .style('font-size', '20px')
-                        .style('font-style', 'italic')
-                        .style('font-family', 'Italianno')
-                        .style('opacity', 0) // Start text with opacity 0
-                        .transition()
-                        .delay(200) // Delay each text element
-                        .duration(1000) // Transition duration
-                        .style('opacity', 1);
-                }
-                if (action == "setupPayoff") {
-                    svg.selectAll('.udd')
-                        .data(payOffs)
-                        .enter()
-                        .append('text')
-                        .text(d => d.p1 + " , " + d.p2)
-                        .attr('x', (d, i) => payOffPosition[i].x)
-                        .attr('y', (d, i) => payOffPosition[i].y)
-                        .attr('fill', 'white')
-                        .style('font-size', '20px')
-                        .style('font-style', 'italic')
-                        .style('font-family', 'Italianno')
-                        .style('opacity', 0) // Start text with opacity 0
-                        .transition()
-                        .delay(200) // Delay each text element
-                        .duration(1000) // Transition duration
-                        .style('opacity', 1);
-                }
-                if (action == "compare1") {
-                    dom1 = svg.selectAll('.dom1')
-                            .data([lineData1])
-                            .enter()
-                            .append("path")
-                            .attr("d", lineGenerator)
-                            .attr("fill", "white")
-                            .attr("fill-opacity", 0.1)
-                            .attr("stroke", "white")
-                            .attr("stroke-width", 0);
-                }
+        this.players = this.svg.selectAll(".players")
+            .data(this.players)
+            .enter()
+            .append("text")
+            .attr("class", "players")
+            .attr("x", d => d.pos.x)
+            .attr("y", d => d.pos.y)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("fill", "white")
+            .style("opacity", 0)
+            .style("font-size", 25)
+            .style("font-style", "italic")
+            .style("font-family", "Italianno")
+            .text(d => d.text);
 
-                if (action == "compare2") {
-                    dom1.remove();
+        // Draw Payoffs
+        this.payoffData = [
+            { row: 0, col: 0, p1: 2, p2: 2 }, // silent, silent
+            { row: 0, col: 1, p1: 0, p2: 3 }, // silent, defect
+            { row: 1, col: 0, p1: 3, p2: 0 }, // defect, silent
+            { row: 1, col: 1, p1: 1, p2: 1 }  // defect, defect 
+        ];
 
-                    dom2 = svg.selectAll('.dom2')
-                            .data([lineData2])
-                            .enter()
-                            .append("path")
-                            .attr("d", lineGenerator)
-                            .attr("fill", "white")
-                            .attr("fill-opacity", 0.1)
-                            .attr("stroke", "white")
-                            .attr("stroke-width", 0);
-                }
-
-                if (action == "compare3") {
-                    dom2.remove();
-
-                    dom3 = svg.selectAll('.dom3')
-                            .data([lineData3])
-                            .enter()
-                            .append("path")
-                            .attr("d", lineGenerator)
-                            .attr("fill", "white")
-                            .attr("fill-opacity", 0.1)
-                            .attr("stroke", "white")
-                            .attr("stroke-width", 0);
-                }
-
-                if (action == "compare4") {
-                    dom3.remove();
-
-                    dom4 = svg.selectAll('.dom4')
-                            .data([lineData4])
-                            .enter()
-                            .append("path")
-                            .attr("d", lineGenerator)
-                            .attr("fill", "white")
-                            .attr("fill-opacity", 0.1)
-                            .attr("stroke", "white")
-                            .attr("stroke-width", 0);
-                }
-
-                if (action == "showNashEquilibrium") {
-                    dom4.remove();
-
-                    svg.selectAll('.udd')
-                        .data(payOffs)
-                        .enter()
-                        .append('text')
-                        .text(d => d.p1 + " , " + d.p2)
-                        .attr('x', (d, i) => payOffPosition[i].x)
-                        .attr('y', (d, i) => payOffPosition[i].y)
-                        .attr('fill', d => d.p1 == 1 && d.p2 == 1 ? 'green': 'white')
-                        .style('font-size', '20px')
-                        .style('font-style', 'italic')
-                        .style('font-family', 'Italianno')
-                        .style('opacity', 0) // Start text with opacity 0
-                        // .style('color', d=> d.p1 == 1 || d.p2 == 1 ? 'green': 'white')
-                        .transition()
-                        .delay(200) // Delay each text element
-                        .duration(1000) // Transition duration
-                        .style('opacity', 1);
-                }
-                currentState = (currentState + 1) % actionStates.length;
-            }
+        this.payoffTexts = this.svg.selectAll(".payoffs")
+            .data(this.payoffData)
+            .enter()
+            .append("text")
+            .attr("class", "payoffs")
+            .attr("x", d => this.geometry.cellCenter(d.row, d.col).x)
+            .attr("y", d => this.geometry.cellCenter(d.row, d.col).y)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("fill", "white")
+            .style("opacity", 0)
+            .style("font-size", 20)
+            .style("font-style", "italic")
+            .style("font-family", "Italianno")
+            .each(function(d) {
+                const t = d3.select(this);
+                t.append("tspan").attr("class", "p1").text(d.p1);
+                t.append("tspan").text(", ");
+                t.append("tspan").attr("class", "p2").text(d.p2);
+            });
     }
 
-    // Add event listener for keydown events
-    document.addEventListener('keydown', handleKeyPress);
+    update(){
 
+        // Setup normal form
+        if (this.state === 1) {
+            console.log("Normal form initialized");
+            this.xaxis = this.axesDrop(this.xAxis);
+            this.yaxis = this.axesDrop(this.yAxis);
+            this.fadeIn(this.strategyText, null, 1000, 500);
+            this.fadeIn(this.players, null, 1000, 500);
+        }
+
+        // Update player colors
+        if (this.state === 2) {
+            console.log("Coloring players");
+            this.fillColor(this.players, 1000);
+        }
+        
+        // Update payoff matrix
+        if (this.state === 3) {
+            console.log("Displaying payoffs");
+            this.fadeIn(this.payoffTexts, null, 1000, 500);
+        }
+
+        // Focus player 1
+        if (this.state === 4) {
+            console.log("Highlight Player 1 strategies only");
+            this.isolatePlayer(this.payoffTexts, ".p1", ".p2", true);
+        }
+
+        // Underline Best Response for Player 1 in Cyan
+        if (this.state === 5) {
+            console.log("Underline cols for Player 1");
+            this.underlineBest(".p1", [0,1], null, "cyan");
+        }
+
+        if (this.state === 6) {
+            console.log("Highlight Player 1 strategies only");
+            this.isolatePlayer(this.payoffTexts, ".p2", ".p1", false);
+        }
+
+        if (this.state === 7) {
+            console.log("Underline rows for Player 2");
+            this.underlineBest(".p2", null, [0,1], "tomato");
+        }
+
+        if (this.state === 8) {
+            console.log("Show all");
+            this.payoffTexts.selectAll(".p1, .p2")
+                    .interrupt()
+                    .transition()
+                    .duration(1000)
+                    .delay(500)
+                    .style("opacity", 1);
+        }
+
+    }
 }
