@@ -1,8 +1,26 @@
 
-import {TwoByTwoGameLeftPane} from './twoPlayerGame.js'
-import { GeometryEngine } from './twoPlayerGeometryEngine.js';
+import { NByNGame } from './helpers/twoPlayerGame.js';
+import { GeometryEngine } from './helpers/twoPlayerGeometryEngine.js';
 
-export class PrisonersDilemma extends TwoByTwoGameLeftPane {
+export const prisonersDilemma = {
+    players: ["1", "2"],
+    colors: ["cyan", "tomato"],
+    rows: ["Silent", "Defect"],
+    cols: ["Silent", "Defect"],
+    payoffs: [
+        [ {p1:2, p2:2}, {p1:0, p2:3} ],
+        [ {p1:3, p2:0}, {p1:1, p2:1} ]
+    ]
+};
+
+// const game = new NByNGame()
+
+
+
+
+
+
+export class PrisonersDilemma extends NByNGame {
     
     drawBase() {
 

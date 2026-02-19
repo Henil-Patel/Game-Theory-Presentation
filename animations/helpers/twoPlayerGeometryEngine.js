@@ -1,8 +1,10 @@
 export class GeometryEngine {
-    constructor(width, height, margin) {
+    constructor(width, height, margin, rows, cols) {
         this.width = width;
         this.height = height;
         this.margin = margin;
+        this.rows = rows;
+        this.cols = cols;
 
         this.compute();
     }
@@ -15,8 +17,8 @@ export class GeometryEngine {
         this.midX = (this.left + this.right) / 2;
         this.midY = (this.top + this.bottom) / 2;
 
-        this.cellWidth = (this.right - this.left) / 2;
-        this.cellHeight = (this.bottom - this.top) / 2;
+        this.cellWidth = (this.right - this.left) / this.cols;
+        this.cellHeight = (this.bottom - this.top) / this.rows;
     }
 
     xAxis() {

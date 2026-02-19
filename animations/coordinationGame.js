@@ -1,7 +1,8 @@
-import { TwoByTwoGameLeftPane } from './twoPlayerGame.js'
-import { GeometryEngine } from './twoPlayerGeometryEngine.js';
 
-export class CoordinationGame extends TwoByTwoGameLeftPane {
+import { NByNGame } from './helpers/twoPlayerGame.js'
+import { GeometryEngine } from './helpers/twoPlayerGeometryEngine.js';
+
+export class CoordinationGame extends NByNGame {
     
     drawBase() {
 
